@@ -1,0 +1,9 @@
+{
+    "timezone": "MET",
+    "header": {
+        "asset_name": "foo"
+    },
+    "pages": [],
+    "time_fmt": "%a %H:%M",
+	"tick_height": 45
+}

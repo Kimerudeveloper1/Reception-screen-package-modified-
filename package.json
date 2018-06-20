@@ -1,0 +1,10 @@
+{
+    "name": "Reception Screen (modified)",
+    "author": "Florian Wesch <fw@info-beamer.com>",
+    "desc": "Shows textual/image and video information for a reception-style information screen.",
+    "repository": "https://github.com/tioma18/tick",
+    "version": "0.3",
+	"runtime": {
+		"antialias": true
+	}
+}
