@@ -643,29 +643,29 @@ local function JobQueue()
 		if #jobs > 0 and jobs[index].fn == fn then
 			jobs[index].starts = starts
 			jobs[index].ends = ends
-			
-			return
+		elseif
+			local co = coroutine.create(fn)
+			local ok, again = coroutine.resume(co, starts, ends)
+			if not ok then
+				return error(("%s\n%s\ninside coroutine %s started by"):format(
+					again, debug.traceback(job.co), job)
+				)
+			elseif not again then
+				return
+			end
+
+			local job = {
+				starts = starts,
+				ends = ends,
+				coord = coord,
+				co = co,
+				fn = fn
+			}
+
+			jobs[#jobs+1] = job
 		end
 		
-        local co = coroutine.create(fn)
-        local ok, again = coroutine.resume(co, starts, ends)
-        if not ok then
-            return error(("%s\n%s\ninside coroutine %s started by"):format(
-                again, debug.traceback(job.co), job)
-            )
-        elseif not again then
-            return
-        end
-
-        local job = {
-            starts = starts,
-            ends = ends,
-            coord = coord,
-            co = co,
-			fn = fn
-        }
-
-        jobs[#jobs+1] = job
+		index = index + 1
     end
 
     local function tick(now)
@@ -998,7 +998,7 @@ util.file_watch("config.json", function(raw)
 end)
 
 function node.render()
-	index = index + 1
+	index = 1
     gl.clear(0, 0, 0, 1)
     local now = clock.unix()
     scheduler.tick(now)
