@@ -635,37 +635,27 @@ local function Markup(config)
 end
 
 
-local index = 1
 local function JobQueue()
     local jobs = {}
 
     local function add(fn, starts, ends, coord)
-		if #jobs > 0 and #jobs >= index and jobs[index].done then
-			jobs[index].starts = starts
-			jobs[index].ends = ends
-			jobs[index].done = false
-		else 
-			local co = coroutine.create(fn)
-			local ok, again = coroutine.resume(co, starts, ends)
-			if not ok then
-				return error(("%s\n%s\ninside coroutine %s started by"):format(
-					again, debug.traceback(job.co), job)
-				)
-			elseif not again then
-				return
-			end
-
-			local job = {
-				starts = starts,
-				ends = ends,
-				coord = coord,
-				co = co,
-			}
-
-			jobs[#jobs+1] = job
+		local co = coroutine.create(fn)
+		local ok, again = coroutine.resume(co, starts, ends)
+		if not ok then
+			return error(("%s\n%s\ninside coroutine %s started by"):format(
+				again, debug.traceback(job.co), job)
+			)
+		elseif not again then
+			return
 		end
-		
-		index = index + 1
+		local job = {
+			starts = starts,
+			ends = ends,
+			coord = coord,
+			co = co,
+		}
+
+		jobs[#jobs+1] = job
     end
 
     local function tick(now)
@@ -686,15 +676,20 @@ local function JobQueue()
             elseif not again then
                 job.done = true
             end
+			
+			job.starts = job.starts + total_duration
+			job.ends = job.ends + total_duration
         end
 
-        -- iterate backwards so we can remove finished jobs
-        -- for idx = #jobs,1,-1 do
-            -- local job = jobs[idx]
-            -- if job.done then
-                -- table.remove(jobs, idx)
-            -- end
-        -- end
+        --iterate backwards so we can remove finished jobs
+		if reload then
+			for idx = #jobs,1,-1 do
+				local job = jobs[idx]
+				if job.done then
+					table.remove(jobs, idx)
+				end
+			end
+		end
 		
 
         if #jobs == 0 then
@@ -718,14 +713,14 @@ local function Scheduler(playlist_source, job_queue)
     local SCHEDULE_LOOKAHEAD = 2
 
     local function tick(now)
-        if now < next_schedule then
+        if now < next_schedule or not reload then
             return
         end
 
         local playlist = playlist_source()
 
         -- get total playlist duration
-        local total_duration = 0
+        total_duration = 0 --global
         for idx = 1, #playlist do
             local item = playlist[idx]
             total_duration = max(total_duration, item.offset + item.duration)
@@ -995,10 +990,13 @@ local scheduler = Scheduler(playlist, job_queue)
 
 util.file_watch("config.json", function(raw)
     node_config = json.decode(raw)
+	
+	reload = true
 end)
 
+local reload = true
+
 function node.render()
-	index = 1
     gl.clear(0, 0, 0, 1)
     local now = clock.unix()
     scheduler.tick(now)
