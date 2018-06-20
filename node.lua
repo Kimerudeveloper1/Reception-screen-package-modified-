@@ -634,7 +634,8 @@ local function Markup(config)
     end
 end
 
-
+local reload = true
+local total_duration = 0
 
 local function JobQueue()
     local jobs = {}
@@ -683,14 +684,14 @@ local function JobQueue()
         end
 
         --iterate backwards so we can remove finished jobs
-
+		if reload then
 			for idx = #jobs,1,-1 do
 				local job = jobs[idx]
 				if job.done then
 					table.remove(jobs, idx)
 				end
 			end
-		
+		end
 		
 
         if #jobs == 0 then
@@ -714,10 +715,13 @@ local function Scheduler(playlist_source, job_queue)
     local SCHEDULE_LOOKAHEAD = 2
 
     local function tick(now)
+        if now < next_schedule or not reload then
+            return
+        end
+
         local playlist = playlist_source()
 
         -- get total playlist duration
-        total_duration = 0 --global
         for idx = 1, #playlist do
             local item = playlist[idx]
             total_duration = max(total_duration, item.offset + item.duration)
