@@ -634,10 +634,19 @@ local function Markup(config)
     end
 end
 
+
+local index = 1
 local function JobQueue()
     local jobs = {}
 
     local function add(fn, starts, ends, coord)
+		if #jobs > 0 and jobs[index].fn = fn then
+			jobs[index].starts = starts
+			jobs[index].ends = ends
+			
+			return
+		end
+		
         local co = coroutine.create(fn)
         local ok, again = coroutine.resume(co, starts, ends)
         if not ok then
@@ -653,6 +662,7 @@ local function JobQueue()
             ends = ends,
             coord = coord,
             co = co,
+			fn = fn
         }
 
         jobs[#jobs+1] = job
@@ -679,12 +689,12 @@ local function JobQueue()
         end
 
         -- iterate backwards so we can remove finished jobs
-        for idx = #jobs,1,-1 do
-            local job = jobs[idx]
-            if job.done then
-                table.remove(jobs, idx)
-            end
-        end
+        -- for idx = #jobs,1,-1 do
+            -- local job = jobs[idx]
+            -- if job.done then
+                -- table.remove(jobs, idx)
+            -- end
+        -- end
 		
 
         if #jobs == 0 then
@@ -988,6 +998,7 @@ util.file_watch("config.json", function(raw)
 end)
 
 function node.render()
+	index = index + 1
     gl.clear(0, 0, 0, 1)
     local now = clock.unix()
     scheduler.tick(now)
