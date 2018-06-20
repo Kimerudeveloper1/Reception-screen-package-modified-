@@ -306,7 +306,7 @@ local function Image(config)
 	local img = resource.load_image(file)
 	
     return function(starts, ends)
-		while (true){
+		while (true) do
 		wait_t(starts - 2)
 
         local fade_time = config.fade_time or 0.5
@@ -387,7 +387,7 @@ local function Image(config)
         end
 		
 		coroutine.yield()
-		}
+		end
 
         -- img:dispose()
     end
