@@ -39,7 +39,7 @@ local function ramp(t_s, t_e, t_c, ramp_time)
 end
 
 local function wait_frame()
-    -- return coroutine.yield(true)
+    return coroutine.yield(true)
 end
 
 local function wait_t(t)
@@ -306,8 +306,7 @@ local function Image(config)
 	local img = resource.load_image(file)
 	
     return function(starts, ends)
-		while (true) do
-		wait_t(starts - 2)
+        wait_t(starts - 2)
 
         local fade_time = config.fade_time or 0.5
 
@@ -386,10 +385,7 @@ local function Image(config)
             end
         end
 		
-		starts, ends = coroutine.yield()
-		end
-
-        -- img:dispose()
+        img:dispose()
     end
 end
 
@@ -638,30 +634,28 @@ local function Markup(config)
     end
 end
 
-local reload = true
-local total_duration = 0
-
 local function JobQueue()
     local jobs = {}
 
     local function add(fn, starts, ends, coord)
-		local co = coroutine.create(fn)
-		local ok, again = coroutine.resume(co, starts, ends)
-		if not ok then
-			return error(("%s\n%s\ninside coroutine %s started by"):format(
-				again, debug.traceback(job.co), job)
-			)
-		elseif not again then
-			return
-		end
-		local job = {
-			starts = starts,
-			ends = ends,
-			coord = coord,
-			co = co,
-		}
+        local co = coroutine.create(fn)
+        local ok, again = coroutine.resume(co, starts, ends)
+        if not ok then
+            return error(("%s\n%s\ninside coroutine %s started by"):format(
+                again, debug.traceback(job.co), job)
+            )
+        elseif not again then
+            return
+        end
 
-		jobs[#jobs+1] = job
+        local job = {
+            starts = starts,
+            ends = ends,
+            coord = coord,
+            co = co,
+        }
+
+        jobs[#jobs+1] = job
     end
 
     local function tick(now)
@@ -673,29 +667,24 @@ local function JobQueue()
                 overlays[(idx-1)%#overlays+1]:draw(x1, y1, x2, y2, 0.1)
             end
 
-            coroutine.resume(job.co, now, x1, y1, x2, y2)
-            -- if not ok then
-                -- print(("%s\n%s\ninside coroutine %s resumed by"):format(
-                    -- again, debug.traceback(job.co), job)
-                -- )
-                -- job.done = true
-            -- elseif not again then
-                -- job.done = true
-            -- end
-			
-			job.starts = job.starts + total_duration
-			job.ends = job.ends + total_duration
+            local ok, again = coroutine.resume(job.co, now, x1, y1, x2, y2)
+            if not ok then
+                print(("%s\n%s\ninside coroutine %s resumed by"):format(
+                    again, debug.traceback(job.co), job)
+                )
+                job.done = true
+            elseif not again then
+                job.done = true
+            end
         end
 
-        --iterate backwards so we can remove finished jobs
-		if reload then
-			for idx = #jobs,1,-1 do
-				local job = jobs[idx]
-				if job.done then
-					table.remove(jobs, idx)
-				end
-			end
-		end
+        -- iterate backwards so we can remove finished jobs
+        for idx = #jobs,1,-1 do
+            local job = jobs[idx]
+            if job.done then
+                table.remove(jobs, idx)
+            end
+        end
 		
 
         if #jobs == 0 then
@@ -719,13 +708,14 @@ local function Scheduler(playlist_source, job_queue)
     local SCHEDULE_LOOKAHEAD = 2
 
     local function tick(now)
-        if now < next_schedule or not reload then
+        if now < next_schedule then
             return
         end
 
         local playlist = playlist_source()
 
         -- get total playlist duration
+        local total_duration = 0
         for idx = 1, #playlist do
             local item = playlist[idx]
             total_duration = max(total_duration, item.offset + item.duration)
@@ -762,8 +752,6 @@ local function Scheduler(playlist_source, job_queue)
 
         scheduled_until = base + total_duration
         next_schedule = scheduled_until - SCHEDULE_LOOKAHEAD
-		
-		reload = false
     end
 
     return {
