@@ -306,7 +306,8 @@ local function Image(config)
 	local img = resource.load_image(file)
 	
     return function(starts, ends)
-        wait_t(starts - 2)
+		while (true){
+		wait_t(starts - 2)
 
         local fade_time = config.fade_time or 0.5
 
@@ -385,6 +386,9 @@ local function Image(config)
             end
         end
 		
+		coroutine.yield()
+		}
+
         -- img:dispose()
     end
 end
@@ -669,15 +673,15 @@ local function JobQueue()
                 overlays[(idx-1)%#overlays+1]:draw(x1, y1, x2, y2, 0.1)
             end
 
-            local ok, again = coroutine.resume(job.co, now, x1, y1, x2, y2)
-            if not ok then
-                print(("%s\n%s\ninside coroutine %s resumed by"):format(
-                    again, debug.traceback(job.co), job)
-                )
-                job.done = true
-            elseif not again then
-                job.done = true
-            end
+            coroutine.resume(job.co, now, x1, y1, x2, y2)
+            -- if not ok then
+                -- print(("%s\n%s\ninside coroutine %s resumed by"):format(
+                    -- again, debug.traceback(job.co), job)
+                -- )
+                -- job.done = true
+            -- elseif not again then
+                -- job.done = true
+            -- end
 			
 			job.starts = job.starts + total_duration
 			job.ends = job.ends + total_duration
