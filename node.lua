@@ -386,7 +386,7 @@ local function Image(config)
             end
         end
 		
-		coroutine.yield()
+		starts, ends = coroutine.yield()
 		end
 
         -- img:dispose()
