@@ -643,7 +643,7 @@ local function JobQueue()
 		if #jobs > 0 and jobs[index].fn == fn then
 			jobs[index].starts = starts
 			jobs[index].ends = ends
-		elseif
+		else 
 			local co = coroutine.create(fn)
 			local ok, again = coroutine.resume(co, starts, ends)
 			if not ok then
