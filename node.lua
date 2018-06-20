@@ -677,8 +677,8 @@ local function JobQueue()
                 job.done = true
             end
 			
-			job.starts = job.starts + total_duration
-			job.ends = job.ends + total_duration
+			-- job.starts = job.starts + total_duration
+			-- job.ends = job.ends + total_duration
         end
 
         --iterate backwards so we can remove finished jobs
@@ -992,8 +992,6 @@ local scheduler = Scheduler(playlist, job_queue)
 
 util.file_watch("config.json", function(raw)
     node_config = json.decode(raw)
-	
-	reload = true
 end)
 
 local reload = true
