@@ -640,7 +640,7 @@ local function JobQueue()
     local jobs = {}
 
     local function add(fn, starts, ends, coord)
-		if #jobs > 0 and jobs[index].fn = fn then
+		if #jobs > 0 and jobs[index].fn == fn then
 			jobs[index].starts = starts
 			jobs[index].ends = ends
 			
