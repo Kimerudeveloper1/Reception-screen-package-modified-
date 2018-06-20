@@ -640,9 +640,10 @@ local function JobQueue()
     local jobs = {}
 
     local function add(fn, starts, ends, coord)
-		if #jobs > 0 and #jobs >= index and jobs[index].index == index then
+		if #jobs > 0 and #jobs >= index and jobs[index].done then
 			jobs[index].starts = starts
 			jobs[index].ends = ends
+			jobs[index].done = false
 		else 
 			local co = coroutine.create(fn)
 			local ok, again = coroutine.resume(co, starts, ends)
@@ -659,7 +660,6 @@ local function JobQueue()
 				ends = ends,
 				coord = coord,
 				co = co,
-				index = index,
 			}
 
 			jobs[#jobs+1] = job
