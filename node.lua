@@ -665,42 +665,42 @@ local function JobQueue()
     end
 
     local function tick(now)
-        for idx = 1, #jobs do
-            local job = jobs[idx]
-            local x1, y1, x2, y2 = job.coord(job.starts, job.ends, now)
+        -- for idx = 1, #jobs do
+            -- local job = jobs[idx]
+            -- local x1, y1, x2, y2 = job.coord(job.starts, job.ends, now)
 
-            if overlay_debug then
-                overlays[(idx-1)%#overlays+1]:draw(x1, y1, x2, y2, 0.1)
-            end
-
-            coroutine.resume(job.co, now, x1, y1, x2, y2)
-            -- if not ok then
-                -- print(("%s\n%s\ninside coroutine %s resumed by"):format(
-                    -- again, debug.traceback(job.co), job)
-                -- )
-                -- job.done = true
-            -- elseif not again then
-                -- job.done = true
+            -- if overlay_debug then
+                -- overlays[(idx-1)%#overlays+1]:draw(x1, y1, x2, y2, 0.1)
             -- end
-			
-			job.starts = job.starts + total_duration
-			job.ends = job.ends + total_duration
-        end
 
-        --iterate backwards so we can remove finished jobs
-		if reload then
-			for idx = #jobs,1,-1 do
-				local job = jobs[idx]
-				if job.done then
-					table.remove(jobs, idx)
-				end
-			end
-		end
+            -- coroutine.resume(job.co, now, x1, y1, x2, y2)
+            -- -- if not ok then
+                -- -- print(("%s\n%s\ninside coroutine %s resumed by"):format(
+                    -- -- again, debug.traceback(job.co), job)
+                -- -- )
+                -- -- job.done = true
+            -- -- elseif not again then
+                -- -- job.done = true
+            -- -- end
+			
+			-- job.starts = job.starts + total_duration
+			-- job.ends = job.ends + total_duration
+        -- end
+
+        -- --iterate backwards so we can remove finished jobs
+		-- if reload then
+			-- for idx = #jobs,1,-1 do
+				-- local job = jobs[idx]
+				-- if job.done then
+					-- table.remove(jobs, idx)
+				-- end
+			-- end
+		-- end
 		
 
-        if #jobs == 0 then
-            print "empty"
-        end
+        -- if #jobs == 0 then
+            -- print "empty"
+        -- end
     end
 
     return {
