@@ -757,6 +757,8 @@ local function Scheduler(playlist_source, job_queue)
 
         scheduled_until = base + total_duration
         next_schedule = scheduled_until - SCHEDULE_LOOKAHEAD
+		
+		reload = false
     end
 
     return {
