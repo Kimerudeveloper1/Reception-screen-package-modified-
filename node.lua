@@ -998,7 +998,7 @@ local scheduler = Scheduler(playlist, job_queue)
 util.file_watch("config.json", function(raw)
 	print("ROTATION")
     node_config = json.decode(raw)
-	playlist = playlist()
+	playlist = nil
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 	print("ROTATION")
