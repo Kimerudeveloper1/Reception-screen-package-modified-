@@ -374,10 +374,6 @@ local function Image(config)
 					end
                 else
                     if config.transparent then
-						print(x1)
-						print(x2)
-						print(y1)
-						print(y2)
 						img:draw(x1, y1, x2, y2, 0.5)
 					else
 						img:draw(x1, y1, x2, y2, ramp(
@@ -801,7 +797,11 @@ local function playlist()
     end
 
     local function tile_bottom(s, e, now)
-		if node_config.orientation == 0 then
+        return 0, HEIGHT-node_config.tick_height, WIDTH, HEIGHT
+    end
+
+    local function tile_bottom_scroller(s, e, now)
+        if node_config.orientation == 0 then
 			return 0, HEIGHT-node_config.tick_height, WIDTH, HEIGHT
 		end
 		if node_config.orientation == 90 then
@@ -813,10 +813,6 @@ local function playlist()
 		if node_config.orientation == 270 then
 			return WIDTH - node_config.tick_height, 0, WIDTH, HEIGHT
 		end
-    end
-
-    local function tile_bottom_scroller(s, e, now)
-        return 0, HEIGHT-node_config.tick_height, WIDTH, HEIGHT --Set 0
     end
 
     local function tile_bottom_clock(s, e, now)
