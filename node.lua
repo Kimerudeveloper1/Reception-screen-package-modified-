@@ -409,31 +409,32 @@ local function Video(config)
         local fade_time = config.fade_time or 0.5
 
         local vid
-        if config.raw then
-            local raw = sys.get_ext "raw_video"
-            vid = raw.load_video{
-                file = file,
-                paused = true,
-                audio = node_config.audio,
-            }
-            vid:layer(-10)
+        -- if config.raw then
+            -- local raw = sys.get_ext "raw_video"
+            -- vid = raw.load_video{
+                -- file = file,
+                -- paused = true,
+                -- audio = node_config.audio,
+            -- }
+            -- vid:layer(-10)
 			
-			-- local state, width, height = res:state()
-			-- if node_config.portrait then
-				-- width, height = height, width
-			-- end
+			-- -- local state, width, height = res:state()
+			-- -- if node_config.portrait then
+				-- -- width, height = height, width
+			-- -- end
 
-            for now, x1, y1, x2, y2 in from_to(starts, ends) do
-                vid:layer(config.layer or 5):start():rotate(node_config.rotation)
-                vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
-                    starts, ends, now, fade_time
-                ))
-            end
-        else
+            -- for now, x1, y1, x2, y2 in from_to(starts, ends) do
+                -- vid:layer(config.layer or 5):start():rotate(node_config.rotation)
+                -- vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
+                    -- starts, ends, now, fade_time
+                -- ))
+            -- end
+        -- else
             vid = resource.load_video{
                 file = file,
                 paused = true,
                 audio = node_config.audio,
+				looped = true
             }
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do
@@ -447,7 +448,7 @@ local function Video(config)
                         starts, ends, now, fade_time
                     ))
                 end
-            end
+            --end
         end
 
         --vid:dispose()
