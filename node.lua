@@ -374,6 +374,10 @@ local function Image(config)
 					end
                 else
                     if config.transparent then
+						print(x1)
+						print(x2)
+						print(y1)
+						print(y2)
 						img:draw(x1, y1, x2, y2, 0.5)
 					else
 						img:draw(x1, y1, x2, y2, ramp(
