@@ -718,8 +718,9 @@ local function Scheduler(playlist_source, job_queue)
             return
         end
 
-		print("SCHEDULE START")
+		print(playlist)
 		
+		print("SCHEDULE START")
 		if not playlist then
 			print("UPDATE PLAYLIST")
 			playlist = playlist_source()
