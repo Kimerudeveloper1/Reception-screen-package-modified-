@@ -384,7 +384,7 @@ local function Image(config)
             end
         end
 		
-        img:dispose()
+        --img:dispose()
     end
 end
 
