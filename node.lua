@@ -708,6 +708,7 @@ local function Scheduler(playlist_source, job_queue)
     local global_synced = false
     local scheduled_until = clock.unix()
     local next_schedule = 0
+	local playlist
 
     local TOLERANCE = 0.05
     local SCHEDULE_LOOKAHEAD = 2
@@ -719,7 +720,9 @@ local function Scheduler(playlist_source, job_queue)
 
 		print("SCHEDULE START")
 		
-        local playlist = playlist_source
+		if not playlist then
+			playlist = playlist_source
+		end
 
         -- get total playlist duration
         local total_duration = 0
@@ -990,7 +993,7 @@ local function playlist()
 end
 
 local job_queue = JobQueue()
-local scheduler = Scheduler(playlist(), job_queue)
+local scheduler = Scheduler(playlist, job_queue)
 
 util.file_watch("config.json", function(raw)
     node_config = json.decode(raw)
