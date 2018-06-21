@@ -93,7 +93,7 @@ local function draw_scroller(x, y, w, h)
                 local img_max_height = h
                 local proportional_width = img_max_height / img_h * img_w
                 item.image:draw(x, y, x+proportional_width, y+img_max_height)
-                x = x + proportional_width + 30
+                x = x + proportional_width + 20
             end
         end
 
