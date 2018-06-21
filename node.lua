@@ -349,10 +349,10 @@ local function Image(config)
 					else
 						if node_config.portrait then
 							util.draw_correct(img, y1, x1, y2, x2, ramp(
-								starts, ends, now, fade_time
+								starts, ends, now, fade_time)
 						else
 							util.draw_correct(img, x1, y1, x2, y2, ramp(
-							starts, ends, now, fade_time
+							starts, ends, now, fade_time)
 						end
                     ))
 					end
