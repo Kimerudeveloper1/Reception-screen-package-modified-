@@ -356,7 +356,6 @@ local function Image(config)
 								starts, ends, now, fade_time
 							))
 						end
-                    ))
 					end
                 else
 					if config.transparent then
