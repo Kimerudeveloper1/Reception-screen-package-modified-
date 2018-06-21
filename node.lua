@@ -302,12 +302,12 @@ local function Image(config)
 	--   transparent: true/false
 
     local file = resource.open_file(config.asset_name)
-
-	local img = resource.load_image(file)
 	
     return function(starts, ends)
         wait_t(starts - 2)
 
+		local img = resource.load_image(file)
+		
         local fade_time = config.fade_time or 0.5
 
         if config.kenburns then
@@ -417,9 +417,14 @@ local function Video(config)
                 audio = node_config.audio,
             }
             vid:layer(-10)
+			
+			-- local state, width, height = res:state()
+			-- if node_config.portrait then
+				-- width, height = height, width
+			-- end
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do
-                vid:layer(config.layer or 5):start()
+                vid:layer(config.layer or 5):start():rotate(node_config.rotation)
                 vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
                     starts, ends, now, fade_time
                 ))
@@ -985,10 +990,14 @@ local scheduler = Scheduler(playlist, job_queue)
 
 util.file_watch("config.json", function(raw)
     node_config = json.decode(raw)
+	node_config.rotation = tonumber(node_config.rotation)
+	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 end)
 
 function node.render()
     gl.clear(0, 0, 0, 1)
+	util.screen_transform(node_config.rotation)
+	
     local now = clock.unix()
     scheduler.tick(now)
 
