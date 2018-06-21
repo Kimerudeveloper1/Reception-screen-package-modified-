@@ -789,7 +789,7 @@ local function playlist()
     end
 
     local function tile_fullscreen(s, e, now)
-        return 0, 0, WIDTH, HEIGHT --Set fullscreen
+        return 0, 0, HEIGHT, WIDTH --Set fullscreen
     end
 
     local function tile_top(s, e, now)
@@ -797,7 +797,18 @@ local function playlist()
     end
 
     local function tile_bottom(s, e, now)
-        return 0, HEIGHT-node_config.tick_height, WIDTH, HEIGHT
+        if node_config.orientation == 0 then
+			return 0, HEIGHT-node_config.tick_height, WIDTH, HEIGHT
+		end
+		if node_config.orientation == 90 then
+			return 0, 0, node_config.tick_height, HEIGHT
+		end
+		if node_config.orientation == 180 then
+			return 0, 0, WIDTH, node_config.tick_height
+		end
+		if node_config.orientation == 270 then
+			return WIDTH - node_config.tick_height, 0, WIDTH, HEIGHT
+		end
     end
 
     local function tile_bottom_scroller(s, e, now)
