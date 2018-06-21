@@ -285,17 +285,12 @@ end
 
 local kenburns_shader = resource.create_shader[[
     uniform sampler2D Texture;
-        varying vec2 TexCoord;
-        uniform vec4 Color;
-        uniform float x, y, s;
-        void main() {
-            vec2 texcoord = TexCoord * vec2(s, s) + vec2(x, y);
-            vec4 c1 = texture2D(Texture, texcoord);
-            vec4 c2 = texture2D(Texture, texcoord + vec2(0.0008, 0.0000));
-            vec4 c3 = texture2D(Texture, texcoord + vec2(0.0004, 0.0004));
-            vec4 c4 = texture2D(Texture, texcoord + vec2(0.0000, 0.0008));
-            gl_FragColor = (c4+c3+c2+c1)*0.25 * Color;
-        }
+    varying vec2 TexCoord;
+    uniform vec4 Color;
+    uniform float x, y, s;
+    void main() {
+        gl_FragColor = texture2D(Texture, TexCoord * vec2(s, s) + vec2(x, y)) * Color;
+    }
 ]]
 
 local function Image(config)
@@ -352,8 +347,13 @@ local function Image(config)
 					if config.transparent then
 						util.draw_correct(img, x1, y1, x2, y2, 0.5)
 					else
-						util.draw_correct(img, x1, y1, x2, y2, ramp(
+						if node_config.portrait then
+							util.draw_correct(img, y1, x1, y2, x2, ramp(
+								starts, ends, now, fade_time
+						else
+							util.draw_correct(img, x1, y1, x2, y2, ramp(
 							starts, ends, now, fade_time
+						end
                     ))
 					end
                 else
@@ -1005,14 +1005,10 @@ local scheduler = Scheduler(playlist, job_queue)
 util.file_watch("config.json", function(raw)
 	print("UPDATE")
     node_config = json.decode(raw)
-	for idx = 1, #node_config.pages do
-		print(node_config.pages[idx])
-	end
+	
 	playlist_Global = false
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
-	print("ROTATION")
-	print(node_config.rotation)
 end)
 
 function node.render()
