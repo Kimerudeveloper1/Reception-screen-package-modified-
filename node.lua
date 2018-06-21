@@ -721,7 +721,7 @@ local function Scheduler(playlist_source, job_queue)
 		print("SCHEDULE START")
 		
 		if not playlist then
-			playlist = playlist_source
+			playlist = playlist_source()
 		end
 
         -- get total playlist duration
