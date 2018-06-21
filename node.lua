@@ -998,8 +998,8 @@ local scheduler = Scheduler(playlist, job_queue)
 
 util.file_watch("config.json", function(raw)
 	print("UPDATE")
-	print(raw)
     node_config = json.decode(raw)
+	print(node_config.pages)
 	playlist = false
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
