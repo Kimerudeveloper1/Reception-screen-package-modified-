@@ -721,6 +721,7 @@ local function Scheduler(playlist_source, job_queue)
 		print("SCHEDULE START")
 		
 		if not playlist then
+			printf("UPDATE PLAYLIST")
 			playlist = playlist_source()
 		end
 
