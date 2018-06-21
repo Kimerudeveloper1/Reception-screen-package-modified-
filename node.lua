@@ -719,7 +719,7 @@ local function Scheduler(playlist_source, job_queue)
 
 		print("SCHEDULE START")
 		
-        local playlist = playlist_source()
+        local playlist = playlist_source
 
         -- get total playlist duration
         local total_duration = 0
@@ -990,7 +990,7 @@ local function playlist()
 end
 
 local job_queue = JobQueue()
-local scheduler = Scheduler(playlist, job_queue)
+local scheduler = Scheduler(playlist(), job_queue)
 
 util.file_watch("config.json", function(raw)
     node_config = json.decode(raw)
