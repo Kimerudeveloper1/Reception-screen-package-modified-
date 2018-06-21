@@ -117,7 +117,7 @@ local function draw_scroller(x, y, w, h)
 
     scissors.disable()
 
-    current_left = current_left - advance * 2
+    current_left = current_left - advance
 end
 
 function M.updated_config_json(config)
