@@ -39,7 +39,6 @@ local function ramp(t_s, t_e, t_c, ramp_time)
 end
 
 local function wait_frame()
-	print("COROUTINE FIRED")
     return coroutine.yield(true)
 end
 
@@ -303,12 +302,11 @@ local function Image(config)
 	--   transparent: true/false
 
     local file = resource.open_file(config.asset_name)
+	local img = resource.load_image(file)
 	
     return function(starts, ends)
         wait_t(starts - 2)
 
-		local img = resource.load_image(file)
-		
         local fade_time = config.fade_time or 0.5
 
         if config.kenburns then
@@ -386,7 +384,7 @@ local function Image(config)
             end
         end
 		
-        img:dispose()
+        --img:dispose()
     end
 end
 
@@ -718,6 +716,8 @@ local function Scheduler(playlist_source, job_queue)
             return
         end
 
+		print("SCHEDULE START")
+		
         local playlist = playlist_source()
 
         -- get total playlist duration
@@ -758,6 +758,8 @@ local function Scheduler(playlist_source, job_queue)
 
         scheduled_until = base + total_duration
         next_schedule = scheduled_until - SCHEDULE_LOOKAHEAD
+		
+		print("SCHEDULE STOP")
     end
 
     return {
@@ -998,7 +1000,6 @@ util.file_watch("config.json", function(raw)
 end)
 
 function node.render()
-	print("RENDER FIRED")
     gl.clear(0, 0, 0, 1)
 	util.screen_transform(node_config.rotation)
 	
