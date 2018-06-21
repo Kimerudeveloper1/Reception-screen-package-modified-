@@ -301,15 +301,12 @@ local function Image(config)
     --   fit: true/false
 	--   transparent: true/false
 
-    
-	print("LOAD IMAGE")
+    local file = resource.open_file(config.asset_name)
+	local img = resource.load_image(file)
 	
     return function(starts, ends)
         wait_t(starts - 2)
 
-		local file = resource.open_file(config.asset_name)
-		local img = resource.load_image(file)
-		
         local fade_time = config.fade_time or 0.5
 
         if config.kenburns then
