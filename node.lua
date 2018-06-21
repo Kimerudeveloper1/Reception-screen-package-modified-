@@ -285,12 +285,17 @@ end
 
 local kenburns_shader = resource.create_shader[[
     uniform sampler2D Texture;
-    varying vec2 TexCoord;
-    uniform vec4 Color;
-    uniform float x, y, s;
-    void main() {
-        gl_FragColor = texture2D(Texture, TexCoord * vec2(s, s) + vec2(x, y)) * Color;
-    }
+        varying vec2 TexCoord;
+        uniform vec4 Color;
+        uniform float x, y, s;
+        void main() {
+            vec2 texcoord = TexCoord * vec2(s, s) + vec2(x, y);
+            vec4 c1 = texture2D(Texture, texcoord);
+            vec4 c2 = texture2D(Texture, texcoord + vec2(0.0008, 0.0000));
+            vec4 c3 = texture2D(Texture, texcoord + vec2(0.0004, 0.0004));
+            vec4 c4 = texture2D(Texture, texcoord + vec2(0.0000, 0.0008));
+            gl_FragColor = (c4+c3+c2+c1)*0.25 * Color;
+        }
 ]]
 
 local function Image(config)
