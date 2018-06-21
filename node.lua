@@ -993,7 +993,8 @@ util.file_watch("config.json", function(raw)
     node_config = json.decode(raw)
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
-	print(node_config.rotation, "ROTATION")
+	print("ROTATION")
+	print(node_config.rotation)
 end)
 
 function node.render()
