@@ -981,7 +981,7 @@ local function playlist()
 end
 
 local job_queue = JobQueue()
-local scheduler = Scheduler(playlist(), job_queue)
+local scheduler = Scheduler(playlist, job_queue)
 
 util.file_watch("config.json", function(raw)
     node_config = json.decode(raw)

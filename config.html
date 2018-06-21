@@ -131,6 +131,17 @@
             <br/>
             <input type="number" v-model="tick_height"/>
           </div>
+		  <div class='col-xs-4'>
+            <label class='field-label'>Rotation</label>
+            <br/>
+            <select v-model="rotation">
+				<option disabled value="">Please select one</option>
+				<option value="0">0°</option>
+				<option value="90">90°</option>
+				<option value="180">180°</option>
+				<option value="270">270°</option>
+			</select>
+          </div>
         </div>
 
         <hr/>
