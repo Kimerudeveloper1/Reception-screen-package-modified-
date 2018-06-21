@@ -401,11 +401,11 @@ local function Video(config)
     --   raw: use raw video?
     --   layer: video layer for raw videos
 
-    local file = resource.open_file(config.asset_name)
+    
 
     return function(starts, ends)
         wait_t(starts - 1)
-
+		local file = resource.open_file(config.asset_name)
         local fade_time = config.fade_time or 0.5
 
         local vid
@@ -415,7 +415,7 @@ local function Video(config)
                 file = file,
                 paused = true,
                 audio = node_config.audio,
-				looped = true,
+				--looped = true,
             }
             vid:layer(-10)
 			
@@ -451,7 +451,7 @@ local function Video(config)
             end
         end
 
-        --vid:dispose()
+        vid:dispose()
     end
 end
 
