@@ -101,7 +101,7 @@ local function draw_scroller(x, y, w, h)
             x, y+3, item.text, h-8, 
             color.r, color.g, color.b, color.a
         )
-        x = x + text_width/2
+        x = x + text_width
 
         if x < 0 then
             assert(idx == 1)
@@ -117,7 +117,7 @@ local function draw_scroller(x, y, w, h)
 
     scissors.disable()
 
-    current_left = current_left - advance
+    current_left = current_left - advance * 2
 end
 
 function M.updated_config_json(config)
