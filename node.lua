@@ -996,9 +996,9 @@ local job_queue = JobQueue()
 local scheduler = Scheduler(playlist, job_queue)
 
 util.file_watch("config.json", function(raw)
-	print("ROTATION")
+	print("UPDATE")
     node_config = json.decode(raw)
-	playlist = nil
+	playlist = false
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 	print("ROTATION")
