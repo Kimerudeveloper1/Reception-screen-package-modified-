@@ -39,7 +39,7 @@ local function ramp(t_s, t_e, t_c, ramp_time)
 end
 
 local function wait_frame()
-	ptint("COROUTINE FIRED")
+	print("COROUTINE FIRED")
     return coroutine.yield(true)
 end
 
