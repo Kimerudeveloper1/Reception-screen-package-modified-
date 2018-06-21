@@ -450,7 +450,7 @@ local function Video(config)
             end
         end
 
-        vid:dispose()
+        --vid:dispose()
     end
 end
 
@@ -703,12 +703,12 @@ local function JobQueue()
     }
 end
 
-
+local playlist
 local function Scheduler(playlist_source, job_queue)
     local global_synced = false
     local scheduled_until = clock.unix()
     local next_schedule = 0
-	local playlist
+	
 
     local TOLERANCE = 0.05
     local SCHEDULE_LOOKAHEAD = 2
@@ -1001,6 +1001,7 @@ util.file_watch("config.json", function(raw)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 	print("ROTATION")
 	print(node_config.rotation)
+	playlist = playlist()
 end)
 
 function node.render()
