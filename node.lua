@@ -39,6 +39,7 @@ local function ramp(t_s, t_e, t_c, ramp_time)
 end
 
 local function wait_frame()
+	ptint("COROUTINE FIRED")
     return coroutine.yield(true)
 end
 
@@ -992,9 +993,11 @@ util.file_watch("config.json", function(raw)
     node_config = json.decode(raw)
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
+	print(node_config.rotation, "ROTATION")
 end)
 
 function node.render()
+	print("RENDER FIRED")
     gl.clear(0, 0, 0, 1)
 	util.screen_transform(node_config.rotation)
 	
