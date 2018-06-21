@@ -93,7 +93,7 @@ local function draw_scroller(x, y, w, h)
                 local img_max_height = h
                 local proportional_width = img_max_height / img_h * img_w
                 item.image:draw(x, y, x+proportional_width, y+img_max_height)
-                x = x + proportional_width + 20
+                x = x + proportional_width + 30
             end
         end
 
@@ -101,7 +101,7 @@ local function draw_scroller(x, y, w, h)
             x, y+3, item.text, h-8, 
             color.r, color.g, color.b, color.a
         )
-        x = x + text_width
+        x = x + text_width/2
 
         if x < 0 then
             assert(idx == 1)
