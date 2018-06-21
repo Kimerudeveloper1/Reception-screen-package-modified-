@@ -347,15 +347,9 @@ local function Image(config)
 					if config.transparent then
 						util.draw_correct(img, x1, y1, x2, y2, 0.5)
 					else
-						if node_config.portrait then
-							util.draw_correct(img, y1, x1, y2, x2, ramp(
-								starts, ends, now, fade_time
-							))
-						else
-							util.draw_correct(img, x1, y1, x2, y2, ramp(
-								starts, ends, now, fade_time
-							))
-						end
+						util.draw_correct(img, x1, y1, x2, y2, ramp(
+							starts, ends, now, fade_time
+                    ))
 					end
                 else
 					if config.transparent then
@@ -803,7 +797,18 @@ local function playlist()
     end
 
     local function tile_bottom(s, e, now)
-        return 0, HEIGHT-node_config.tick_height, WIDTH, HEIGHT
+		if node_config.orientation == 0 then
+			return 0, HEIGHT-node_config.tick_height, WIDTH, HEIGHT
+		end
+		if node_config.orientation == 90 then
+			return 0, 0, node_config.tick_height, HEIGHT
+		end
+		if node_config.orientation == 180 then
+			return 0, 0, WIDTH, node_config.tick_height
+		end
+		if node_config.orientation == 270 then
+			return WIDTH - node_config.tick_height, 0, WIDTH, HEIGHT
+		end
     end
 
     local function tile_bottom_scroller(s, e, now)
