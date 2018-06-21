@@ -307,11 +307,12 @@ local function Image(config)
 	--   transparent: true/false
 
     local file = resource.open_file(config.asset_name)
-	local img = resource.load_image(file)
+	
 	
     return function(starts, ends)
         wait_t(starts - 2)
 
+		local img = resource.load_image(file)
 		print("LOAD IMAGE")
 		
         local fade_time = config.fade_time or 0.5
