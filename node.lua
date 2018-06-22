@@ -1004,6 +1004,7 @@ util.file_watch("config.json", function(raw)
 	playlist_Global = false
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
+	util.screen_transform(node_config.rotation)
 end)
 
 function node.render()
@@ -1017,6 +1018,4 @@ function node.render()
     -- gl.perspective(fov, WIDTH/2, HEIGHT/2, -WIDTH,
                         -- WIDTH/2, HEIGHT/2, 0)
     job_queue.tick(now)
-	
-	util.screen_transform(node_config.rotation)
 end
