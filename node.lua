@@ -1008,8 +1008,7 @@ end)
 
 function node.render()
     gl.clear(0, 0, 0, 1)
-	util.screen_transform(node_config.rotation)
-	
+
     local now = clock.unix()
     scheduler.tick(now)
 
@@ -1018,4 +1017,6 @@ function node.render()
     -- gl.perspective(fov, WIDTH/2, HEIGHT/2, -WIDTH,
                         -- WIDTH/2, HEIGHT/2, 0)
     job_queue.tick(now)
+	
+	util.screen_transform(node_config.rotation)
 end
