@@ -112,14 +112,14 @@ Vue.component('config-ui', {
         this.$store.dispatch('set_option', {key: 'tick_height', value: value});
       },
     },
-	rotation: {
+/* 	rotation: {
       get() {
         return this.config.rotation;
       },
       set(value) {
         this.$store.dispatch('set_option', {key: 'rotation', value: value});
       },
-    },
+    }, */
     pages() {
       return this.config.pages;
     },

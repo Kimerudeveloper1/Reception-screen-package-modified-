@@ -424,7 +424,7 @@ local function Video(config)
 			-- end
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do
-                vid:layer(config.layer or 5):start():rotate(node_config.rotation)
+                vid:layer(config.layer or 5):start()
                 vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
                     starts, ends, now, fade_time
                 ))
@@ -1002,13 +1002,10 @@ util.file_watch("config.json", function(raw)
     node_config = json.decode(raw)
 	
 	playlist_Global = false
-	node_config.rotation = tonumber(node_config.rotation)
-	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 end)
 
 function node.render()
     gl.clear(0, 0, 0, 1)
-	util.screen_transform(node_config.rotation)
 	
     local now = clock.unix()
     scheduler.tick(now)

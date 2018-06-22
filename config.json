@@ -5,6 +5,5 @@
     },
     "pages": [],
     "time_fmt": "%a %H:%M",
-	"tick_height": 45,
-	"rotation": 0,
+	"tick_height": 45
 }
