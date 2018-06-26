@@ -336,10 +336,7 @@ local function Image(config)
                 return s + t * (e-s)
             end
 
-            for now, x1, y1, x2, y2 in from_to(starts, ends) do
-				print("SIZE IMAGE")
-				print(x1, y1, x2, y2)
-			
+            for now, x1, y1, x2, y2 in from_to(starts, ends) do			
                 local t = (now - starts) / duration
                 kenburns_shader:use{
                     x = lerp(from.x, to.x, t);
@@ -426,10 +423,7 @@ local function Video(config)
 				-- width, height = height, width
 			-- end
 
-            for now, x1, y1, x2, y2 in from_to(starts, ends) do
-				print("SIZE VIDE")
-				print(x1, y1, x2, y2)
-			
+            for now, x1, y1, x2, y2 in from_to(starts, ends) do			
                 vid:layer(config.layer or 5):start():rotate(node_config.rotation)
                 vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
                     starts, ends, now, fade_time
@@ -1010,8 +1004,7 @@ util.file_watch("config.json", function(raw)
 	playlist_Global = false
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
-	util.screen_transform(node_config.rotation)
-	
+
 	if node_config.portrait then
 		HEIGHT, WIDTH = WIDTH, HEIGHT
 	end
@@ -1023,6 +1016,7 @@ function node.render()
     local now = clock.unix()
     scheduler.tick(now)
 
+	util.screen_transform(node_config.rotation)
 	-- NOT ANY EFFECT
     -- local fov = math.atan2(HEIGHT, WIDTH*2) * 360 / math.pi
     -- gl.perspective(fov, WIDTH/2, HEIGHT/2, -WIDTH,
