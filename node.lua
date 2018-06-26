@@ -337,7 +337,7 @@ local function Image(config)
             end
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do
-				print("SIZE")
+				print("SIZE IMAGE")
 				print(x1, y1, x2, y2)
 			
                 local t = (now - starts) / duration
@@ -427,6 +427,9 @@ local function Video(config)
 			-- end
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do
+				print("SIZE VIDE")
+				print(x1, y1, x2, y2)
+			
                 vid:layer(config.layer or 5):start():rotate(node_config.rotation)
                 vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
                     starts, ends, now, fade_time
