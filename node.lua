@@ -337,6 +337,9 @@ local function Image(config)
             end
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do
+				print("SIZE")
+				print(x1, y1, x2, y2)
+			
                 local t = (now - starts) / duration
                 kenburns_shader:use{
                     x = lerp(from.x, to.x, t);
