@@ -1005,9 +1005,7 @@ util.file_watch("config.json", function(raw)
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 
-	-- if node_config.portrait then
-		-- HEIGHT, WIDTH = WIDTH, HEIGHT
-	-- end
+	screen_setup = rotate(node_config.rotation)
 end)
 
 local function rotate(degree)
@@ -1036,9 +1034,10 @@ local function rotate(degree)
     end
 end
 
+local screen_setup
+
 function node.render()
-	rotate(node_config.rotation)()
+	screen_setup()
 	gl.translate(WIDTH, 0)
-    gl.scale(-1, 1)
 	font_regl:write(0, 0, "Hello World", 100, 1,1,1,1)
 end
