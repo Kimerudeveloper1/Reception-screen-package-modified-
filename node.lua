@@ -996,18 +996,7 @@ end
 
 local job_queue = JobQueue()
 local scheduler = Scheduler(playlist, job_queue)
-local screen_setup 
-
-util.file_watch("config.json", function(raw)
-	print("UPDATE")
-    node_config = json.decode(raw)
-	
-	playlist_Global = false
-	node_config.rotation = tonumber(node_config.rotation)
-	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
-
-	screen_setup = rotate(node_config.rotation)
-end)
+local screen_setup
 
 local function rotate(degree)
     if degree == 0 then
@@ -1035,7 +1024,16 @@ local function rotate(degree)
     end
 end
 
+util.file_watch("config.json", function(raw)
+	print("UPDATE")
+    node_config = json.decode(raw)
+	
+	playlist_Global = false
+	node_config.rotation = tonumber(node_config.rotation)
+	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 
+	screen_setup = rotate(node_config.rotation)
+end)
 
 function node.render()
 	screen_setup()
