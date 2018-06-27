@@ -361,6 +361,7 @@ local function Image(config)
 					end
                 end
                 kenburns_shader:deactivate()
+				util.screen_transform(node_config.rotation)
             end
         else
             for now, x1, y1, x2, y2 in from_to(starts, ends) do
@@ -1022,5 +1023,4 @@ function node.render()
     -- gl.perspective(fov, WIDTH/2, HEIGHT/2, -WIDTH,
                         -- WIDTH/2, HEIGHT/2, 0)
     job_queue.tick(now)
-	util.screen_transform(node_config.rotation)
 end
