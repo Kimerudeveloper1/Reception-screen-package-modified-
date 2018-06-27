@@ -422,8 +422,10 @@ local function Video(config)
 			if node_config.portrait then
 				width, height = height, width
 			end
-			
+			print(NATIVE_WIDTH, NATIVE_HEIGHT, width, height)
 			local x1, y1, x2, y2 = util.scale_into(NATIVE_WIDTH, NATIVE_HEIGHT, width, height)
+			print("SEE THERE")
+			print(x1,y1,x2,y2)
 			vid:layer(config.layer or 5):start():rotate(node_config.rotation)
                 vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
                     starts, ends, now, fade_time
