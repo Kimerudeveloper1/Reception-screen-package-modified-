@@ -1033,8 +1033,7 @@ local function rotate(degree)
 end
 
 function node.render()
-    
+
 	rotate(node_config.rotation)
-	
-    font:write(0, 0, "Hello World", 100, 1,1,1,1)
+font:write(0, 0, "Hello World", 100, 1,1,1,1)
 end
