@@ -1016,7 +1016,7 @@ local function rotate(degree)
     elseif degree == 90 then
         WIDTH, HEIGHT = HEIGHT, WIDTH
         return function()
-			gl.translate(HEIGHT, 0)
+			
             gl.rotate(90, 0, 0, 1)
         end
     elseif degree == 180 then
