@@ -1038,6 +1038,8 @@ local function rotate(degree)
 end
 
 function node.render()
-	gl.translate(50, 0)
+
+    gl.rotate(90, 0, 0, 1)
+	gl.translate(WIDTH, 0)
 	font_regl:write(0, 0, "Hello World", 100, 1,1,1,1)
 end
