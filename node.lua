@@ -1005,9 +1005,9 @@ util.file_watch("config.json", function(raw)
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 
-	if node_config.portrait then
-		HEIGHT, WIDTH = WIDTH, HEIGHT
-	end
+	-- if node_config.portrait then
+		-- HEIGHT, WIDTH = WIDTH, HEIGHT
+	-- end
 end)
 
 local function rotate(degree)
