@@ -996,6 +996,7 @@ end
 
 local job_queue = JobQueue()
 local scheduler = Scheduler(playlist, job_queue)
+local screen_setup 
 
 util.file_watch("config.json", function(raw)
 	print("UPDATE")
@@ -1034,7 +1035,7 @@ local function rotate(degree)
     end
 end
 
-local screen_setup
+
 
 function node.render()
 	screen_setup()
