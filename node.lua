@@ -1011,6 +1011,7 @@ util.file_watch("config.json", function(raw)
 end)
 
 local function rotate(degree)
+	print(degree)
     if degree == 0 then
         return function() end
     elseif degree == 90 then
@@ -1037,7 +1038,6 @@ local function rotate(degree)
 end
 
 function node.render()
-	print(node_config.rotation)
 	rotate(node_config.rotation)
 	gl.translate(WIDTH, 0)
     gl.scale(-1, 1)
