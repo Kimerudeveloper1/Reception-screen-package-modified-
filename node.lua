@@ -343,7 +343,7 @@ local function Image(config)
                     y = lerp(from.y, to.y, t);
                     s = lerp(from.s, to.s, t);
                 }
-                -- if config.fit then
+                if config.fit then
 					if config.transparent then
 						util.draw_correct(img, x1, y1, x2, y2, 0.5)
 					else
@@ -351,15 +351,15 @@ local function Image(config)
 							starts, ends, now, fade_time
                     ))
 					end
-                -- else
-					-- if config.transparent then
-						-- img:draw(x1, y1, x2, y2, 0.5)
-					-- else
-						-- img:draw(x1, y1, x2, y2, ramp(
-							-- starts, ends, now, fade_time
-                    -- ))
-					-- end
-                -- end
+                else
+					if config.transparent then
+						img:draw(x1, y1, x2, y2, 0.5)
+					else
+						img:draw(x1, y1, x2, y2, ramp(
+							starts, ends, now, fade_time
+                    ))
+					end
+                end
                 kenburns_shader:deactivate()
             end
         else
