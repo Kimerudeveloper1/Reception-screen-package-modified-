@@ -20,7 +20,9 @@ local font_bold = resource.load_font "default-font-bold.ttf"
 
 
 function node.render()
+	print(WIDTH, HEIGHT)	
 	WIDTH, HEIGHT = HEIGHT, WIDTH
+	print(WIDTH, HEIGHT)
 	gl.translate(HEIGHT, 0)
     gl.rotate(90, 0, 0, 1)
 	font_regl:write(0, 0, "Hello World", 100, 1,1,1,1)
