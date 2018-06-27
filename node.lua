@@ -1034,6 +1034,7 @@ end
 
 function node.render()
     gl.clear(0, 0, 0, 1)
+	rotate(node_config.rotation)
 	
     local now = clock.unix()
     scheduler.tick(now)
@@ -1044,5 +1045,5 @@ function node.render()
                         WIDTH/2, HEIGHT/2, 0)
     job_queue.tick(now)
 	
-	rotate(node_config.rotation)
+	
 end
