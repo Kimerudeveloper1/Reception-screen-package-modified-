@@ -1017,7 +1017,7 @@ local function rotate(degree)
     elseif degree == 270 then
         WIDTH, HEIGHT = NATIVE_HEIGHT, NATIVE_WIDTH
         return function()
-			gl.translate(WIDTH, HEIGHT)
+			gl.translate(0, HEIGHT)
             gl.rotate(-90, 0, 0, 1)
         end
     else
