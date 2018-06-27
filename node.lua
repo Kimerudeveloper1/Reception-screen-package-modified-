@@ -1037,6 +1037,5 @@ end)
 
 function node.render()
 	screen_setup()
-	gl.translate(WIDTH, 0)
 	font_regl:write(0, 0, "Hello World", 100, 1,1,1,1)
 end
