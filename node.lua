@@ -1024,7 +1024,7 @@ function node.render()
         elseif node_config.rotation == 180 then
             raw_transform = matrix.trans(w, h) *
                             matrix.rotate(node_config.rotation)
-        else node_config.rotation == 270 then
+        else 
             raw_transform = matrix.trans(0, h) *
                             matrix.rotate(node_config.rotation)
 	end
