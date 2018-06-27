@@ -1036,14 +1036,5 @@ function node.render()
     gl.clear(0, 0, 0, 1)
 	rotate(node_config.rotation)
 	
-    local now = clock.unix()
-    scheduler.tick(now)
-
-	-- NOT ANY EFFECT
-    local fov = math.atan2(HEIGHT, WIDTH*2) * 360 / math.pi
-    gl.perspective(fov, WIDTH/2, HEIGHT/2, -WIDTH,
-                        WIDTH/2, HEIGHT/2, 0)
-    job_queue.tick(now)
-	
-	
+    font:write(0, 0, "Hello World", 100, 1,1,1,1)
 end
