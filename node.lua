@@ -1011,23 +1011,33 @@ util.file_watch("config.json", function(raw)
 	end
 end)
 
+function rotate(degree)
+    if degree == 0 then
+        return function() end
+    elseif degree == 90 then
+        WIDTH, HEIGHT = HEIGHT, WIDTH
+        return function()
+            gl.translate(HEIGHT, 0)
+            gl.rotate(90, 0, 0, 1)
+        end
+    elseif degree == 180 then
+        return function()
+            gl.translate(WIDTH, HEIGHT)
+            gl.rotate(180, 0, 0, 1)
+        end
+    elseif degree == 270 then
+        WIDTH, HEIGHT = HEIGHT, WIDTH
+        return function()
+            gl.translate(0, WIDTH)
+            gl.rotate(-90, 0, 0, 1)
+        end
+    else
+        error("unsupported rotation")
+    end
+end
+
 function node.render()
     gl.clear(0, 0, 0, 1)
-	
-	local w, h = NATIVE_WIDTH, NATIVE_HEIGHT
-	gl_transform = util.screen_transform(node_config.rotation)
-	if node_config.rotation == 0 then
-            raw_transform = matrix.identity()
-        elseif node_config.rotation == 90 then
-            raw_transform = matrix.trans(w, 0) *
-                            matrix.rotate(node_config.rotation)
-        elseif node_config.rotation == 180 then
-            raw_transform = matrix.trans(w, h) *
-                            matrix.rotate(node_config.rotation)
-        else 
-            raw_transform = matrix.trans(0, h) *
-                            matrix.rotate(node_config.rotation)
-	end
 	
     local now = clock.unix()
     scheduler.tick(now)
@@ -1037,4 +1047,6 @@ function node.render()
     -- gl.perspective(fov, WIDTH/2, HEIGHT/2, -WIDTH,
                         -- WIDTH/2, HEIGHT/2, 0)
     job_queue.tick(now)
+	
+	rotate(node_config.rotation)
 end
