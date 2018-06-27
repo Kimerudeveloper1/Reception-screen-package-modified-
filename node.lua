@@ -1042,5 +1042,6 @@ function node.render()
 	gl.translate(HEIGHT, 0)
     gl.rotate(90, 0, 0, 1)
 	gl.translate(WIDTH, 0)
+    gl.scale(1, 1)
 	font_regl:write(0, 0, "Hello World", 100, 1,1,1,1)
 end
