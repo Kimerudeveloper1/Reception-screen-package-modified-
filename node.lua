@@ -801,7 +801,17 @@ local function playlist()
     end
 
     local function tile_bottom_scroller(s, e, now)
-        return 0, 0, WIDTH, HEIGHT --Set 0
+		if node_config.rotation == 0 then
+			return 0, NATIVE_HEIGHT-node_config.tick_height, NATIVE_WIDTH, NATIVE_HEIGHT --Set 0
+		elseif node_config.rotation == 90 then
+			return 0, 0, node_config.tick_height, NATIVE_HEIGHT --Set 0
+		elseif node_config.rotation == 180 then
+			return 0, 0, NATIVE_WIDTH, tick_height --Set 0
+		elseif node_config.rotation == 270 then
+			return NATIVE_WIDTH-node_config.tick_height, 0, NATIVE_WIDTH, NATIVE_HEIGHT --Set 0
+		else
+			error("unsupported rotation")
+		end 
     end
 
     local function tile_bottom_clock(s, e, now)
