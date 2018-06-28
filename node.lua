@@ -1044,8 +1044,8 @@ function node.render()
     scheduler.tick(now)
 
 	-- NOT ANY EFFECT
-    -- local fov = math.atan2(HEIGHT, WIDTH*2) * 360 / math.pi
-    -- gl.perspective(fov, WIDTH/2, HEIGHT/2, -WIDTH,
-                        -- WIDTH/2, HEIGHT/2, 0)
+    -- local fov = math.atan2(NATIVE_HEIGHT, NATIVE_WIDTH*2) * 360 / math.pi
+    -- gl.perspective(fov, NATIVE_WIDTH/2, NATIVE_HEIGHT/2, -NATIVE_WIDTH,
+                        -- NATIVE_WIDTH/2, NATIVE_HEIGHT/2, 0)
     job_queue.tick(now)
 end
