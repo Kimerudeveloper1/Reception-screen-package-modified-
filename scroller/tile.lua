@@ -97,6 +97,8 @@ local function draw_scroller(x, y, w, h)
             end
         end
 
+		print("SCROLLER")
+		print(x, y+3, item.text, h-8)
         local text_width = font:write(
             x, y+3, item.text, h-8, 
             color.r, color.g, color.b, color.a
@@ -133,9 +135,6 @@ function M.updated_config_json(config)
 end
 
 function M.task(starts, ends, custom)
-	print("SCROLLER")
-	print(WIDTH, HEIGHT)
-
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
         draw_scroller(x1, y1, x2-x1, y2-y1)
     end
