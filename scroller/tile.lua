@@ -162,6 +162,7 @@ function M.updated_config_json(config)
         texts[#texts+1] = {text = config.texts[idx].text}
     end
 	
+	print("UPDATE TILE CONFIG")
 	screen_setup = rotate(config.rotation)
 end
 
