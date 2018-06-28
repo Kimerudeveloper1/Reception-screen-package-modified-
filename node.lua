@@ -7,6 +7,7 @@ util.noglobals()
 local json = require "json"
 local easing = require "easing"
 local loader = require "loader"
+local matrix = require "matrix"
 
 local min, max, abs, floor = math.min, math.max, math.abs, math.floor
 
@@ -424,7 +425,7 @@ local function Video(config)
 			-- end
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do			
-                vid:layer(config.layer or 5):start():rotate(node_config.rotation)
+                vid:layer(config.layer or 5):start()
                 vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
                     starts, ends, now, fade_time
                 ))
@@ -996,6 +997,7 @@ end
 
 local job_queue = JobQueue()
 local scheduler = Scheduler(playlist, job_queue)
+
 local screen_setup
 
 local function rotate(degree)
@@ -1029,11 +1031,20 @@ util.file_watch("config.json", function(raw)
 	playlist_Global = false
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
-
+	
 	screen_setup = rotate(node_config.rotation)
 end)
 
 function node.render()
+    gl.clear(0, 0, 0, 1)
 	screen_setup()
-	font_regl:write(0, 0, "Hello World", 100, 1,1,1,1)
+	
+    local now = clock.unix()
+    scheduler.tick(now)
+
+	-- NOT ANY EFFECT
+    local fov = math.atan2(HEIGHT, WIDTH*2) * 360 / math.pi
+    gl.perspective(fov, WIDTH/2, HEIGHT/2, -WIDTH,
+                        WIDTH/2, HEIGHT/2, 0)
+    job_queue.tick(now)
 end
