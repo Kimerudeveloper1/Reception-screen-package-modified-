@@ -163,7 +163,7 @@ function M.updated_config_json(config)
     end
 	
 	print("UPDATE TILE CONFIG")
-	screen_setup = rotate(config.rotation)
+	screen_setup = rotate(tonumber(config.rotation))
 end
 
 function M.task(starts, ends, custom)
