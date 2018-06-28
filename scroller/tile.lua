@@ -122,35 +122,6 @@ local function draw_scroller(x, y, w, h)
     current_left = current_left - advance
 end
 
-local screen_setup
-
-local function rotate(degree)
-	WIDTH, HEIGHT = NATIVE_WIDTH, NATIVE_HEIGHT
-    if degree == 0 then
-        return function() end
-    elseif degree == 90 then
-		WIDTH, HEIGHT = NATIVE_HEIGHT, NATIVE_WIDTH
-        return function()
-			print("TILE rotate 90")
-			gl.translate(NATIVE_WIDTH, 0)
-            gl.rotate(90, 0, 0, 1)
-        end
-    elseif degree == 180 then
-        return function()
-			gl.translate(WIDTH, HEIGHT)
-            gl.rotate(180, 0, 0, 1)
-        end
-    elseif degree == 270 then
-		WIDTH, HEIGHT = NATIVE_HEIGHT, NATIVE_WIDTH
-        return function()
-			gl.translate(0, NATIVE_HEIGHT)
-            gl.rotate(270, 0, 0, 1)
-        end
-    else
-        error("unsupported rotation")
-    end
-end
-
 function M.updated_config_json(config)
     font = resource.load_font(api.localized(config.font.asset_name))
     color = config.color
@@ -161,14 +132,10 @@ function M.updated_config_json(config)
     for idx = 1, #config.texts do
         texts[#texts+1] = {text = config.texts[idx].text}
     end
-	
-	print("UPDATE TILE CONFIG")
-	screen_setup = rotate(90)
 end
 
 function M.task(starts, ends, custom)
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
-		screen_setup()
         draw_scroller(x1, y1, x2-x1, y2-y1)
     end
 end
