@@ -834,7 +834,7 @@ local function playlist()
                 asset_name = 'scroller',
                 blend = 1,
             },
-            coord = tile_bottom_scroller,
+            coord = 0, 0, WIDTH, HEIGHT,
         }
         -- add{
             -- offset = offset,
