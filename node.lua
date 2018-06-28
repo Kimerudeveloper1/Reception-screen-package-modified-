@@ -1003,6 +1003,7 @@ local function rotate(degree)
     if degree == 0 then
         return function() end
     elseif degree == 90 then
+		WIDTH, HEIGHT = NATIVE_HEIGHT, NATIVE_WIDTH
         return function()
 			print("rotate 90")
 			gl.translate(WIDTH, 0)
@@ -1014,6 +1015,7 @@ local function rotate(degree)
             gl.rotate(180, 0, 0, 1)
         end
     elseif degree == 270 then
+		WIDTH, HEIGHT = NATIVE_HEIGHT, NATIVE_WIDTH
         return function()
 			gl.translate(0, HEIGHT)
             gl.rotate(270, 0, 0, 1)
