@@ -7,7 +7,6 @@ util.noglobals()
 local json = require "json"
 local easing = require "easing"
 local loader = require "loader"
-local matrix = require "matrix"
 
 local min, max, abs, floor = math.min, math.max, math.abs, math.floor
 
