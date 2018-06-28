@@ -1000,6 +1000,7 @@ local scheduler = Scheduler(playlist, job_queue)
 local screen_setup
 
 local function rotate(degree)
+	WIDTH, HEIGHT = NATIVE_WIDTH, NATIVE_HEIGHT
     if degree == 0 then
         return function() end
     elseif degree == 90 then
