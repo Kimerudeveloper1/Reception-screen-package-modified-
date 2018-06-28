@@ -801,7 +801,7 @@ local function playlist()
     end
 
     local function tile_bottom_scroller(s, e, now)
-        return 0, HEIGHT-node_config.tick_height, WIDTH, HEIGHT --Set 0
+        return 0, 0, WIDTH, HEIGHT --Set 0
     end
 
     local function tile_bottom_clock(s, e, now)
@@ -834,7 +834,7 @@ local function playlist()
                 asset_name = 'scroller',
                 blend = 1,
             },
-            coord = 0, 0, WIDTH, HEIGHT,
+            coord = tile_bottom_scroller,
         }
         -- add{
             -- offset = offset,
