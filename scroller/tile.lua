@@ -136,7 +136,6 @@ end
 
 function M.task(starts, ends, custom)
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
-		gl.translate(-1800, 0)
         draw_scroller(x1, y1, x2-x1, y2-y1)
     end
 end
