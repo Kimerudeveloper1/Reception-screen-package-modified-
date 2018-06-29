@@ -43,7 +43,7 @@ local items = {}
 local current_left = 0
 local last = sys.now()
 
-local function draw_scroller(x, y, w, h)
+local function draw_scroller(y, x, w, h)
     scissors.set(x, y, x+w, y+h)
 
     local now = sys.now()
