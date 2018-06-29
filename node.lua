@@ -417,7 +417,7 @@ local function Video(config)
             vid:layer(-10)
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do			
-                vid:layer(1):start():rotate(node_config.rotation)
+                vid:layer(0):start():rotate(node_config.rotation)
 				vid:target(x1, y1, x2, y2):alpha(ramp( --reduce y
 						starts, ends, now, fade_time
 					))
@@ -1056,7 +1056,7 @@ util.file_watch("config.json", function(raw)
 end)
 
 function node.render()
-    gl.clear(0, 0, 0, 1)
+    -- gl.clear(0, 0, 0, 1)
 	screen_setup()
 	
     local now = clock.unix()
