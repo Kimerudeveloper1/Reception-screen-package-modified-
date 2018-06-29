@@ -415,24 +415,16 @@ local function Video(config)
 				--looped = true,
             }
             vid:layer(-10)
-			
-			-- local state, width, height = res:state()
-			-- if node_config.portrait then
-				-- width, height = height, width
-			-- end
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do			
-                vid:layer(config.layer or 5):start():rotate(node_config.rotation)
-				
-				print("LOOK THERE")
-				print(x1, y1, x2, y2)
+                vid:start():rotate(node_config.rotation)
 				
 				if node_config.rotation == 0 then
 					vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
 						starts, ends, now, fade_time
 					))
 				elseif node_config.rotation == 90 then
-					x2, y2 = y2, x2 
+					x2, y2 = y2, x2
 					vid:target(node_config.tick_height, y1, x2, y2):alpha(ramp( --reduce y
 						starts, ends, now, fade_time
 					))
