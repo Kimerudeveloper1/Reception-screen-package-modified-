@@ -44,7 +44,9 @@ local current_left = 0
 local last = sys.now()
 
 local function draw_scroller(x, y, w, h)
-    scissors.set(x, y, x+w, y+h)
+    -- scissors.set(x, y, x+w, y+h)
+	
+	print(x, y, w, h)
 	
     local now = sys.now()
     local delta = now - last
