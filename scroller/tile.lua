@@ -43,11 +43,12 @@ local items = {}
 local current_left = 0
 local last = sys.now()
 
-local function draw_scroller(x, y, w, h, config)
+local function draw_scroller(x, y, w, h, parent_config)
     -- scissors.set(x, y, x+w, y+h)
 	
-	if degree == 90 or degree == 270 then
+	if parent_config.rotation == 90 or parent_config.rotation == 270 then
         w = NATIVE_WIDTH - h
+	end
 	
 	print(x, y, w, h)
 	
@@ -139,9 +140,9 @@ function M.updated_config_json(config)
     end
 end
 
-function M.task(starts, ends, config)
+function M.task(starts, ends, parent_config)
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
-        draw_scroller(x1, y1, x2-x1, y2-y1, config)
+        draw_scroller(x1, y1, x2-x1, y2-y1, parent_config)
     end
 end
 
