@@ -414,10 +414,9 @@ local function Video(config)
                 audio = node_config.audio,
 				--looped = true,
             }
-            vid:layer(-10)
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do			
-                vid:layer(0):start():rotate(node_config.rotation)
+                vid:start():rotate(node_config.rotation)
 				vid:target(x1, y1, x2, y2):alpha(ramp( --reduce y
 						starts, ends, now, fade_time
 					))
