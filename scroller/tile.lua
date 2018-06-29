@@ -46,9 +46,6 @@ local last = sys.now()
 local function draw_scroller(x, y, w, h)
     scissors.set(x, y, x+w, y+h)
 	
-	print("LOOK HERE")
-	print(x, y, w, h)
-
     local now = sys.now()
     local delta = now - last
     last = now
@@ -103,7 +100,7 @@ local function draw_scroller(x, y, w, h)
 		print("SCROLLER")
 		print(x, y+3, item.text, h-8)
         local text_width = font:write(
-            x, y+3, item.text, h-8, 
+            y, x, item.text, h-8, 
             color.r, color.g, color.b, color.a
         )
         x = x + text_width
