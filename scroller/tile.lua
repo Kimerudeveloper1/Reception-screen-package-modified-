@@ -47,7 +47,7 @@ local function draw_scroller(x, y, w, h, custom)
     -- scissors.set(x, y, x+w, y+h)
 	
 	print("SEE THERE")
-	print(custom)
+	print(custom.rotation)
 	
 	y = 1900
 	
