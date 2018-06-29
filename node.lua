@@ -417,33 +417,14 @@ local function Video(config)
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do			
                 vid:start():rotate(node_config.rotation)
-				vid:target(x1, y1, x2, y2):alpha(ramp( --reduce y
-						starts, ends, now, fade_time
-					))
 				
+				if node_config.rotation == 90 or node_config.rotation == 270 then
+					x2, y2 = y2, x2
+				end
 				
-				-- if node_config.rotation == 0 then
-					-- vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
-						-- starts, ends, now, fade_time
-					-- ))
-				-- elseif node_config.rotation == 90 then
-					-- x2, y2 = y2, x2
-					-- vid:target(node_config.tick_height, y1, x2, y2):alpha(ramp( --reduce y
-						-- starts, ends, now, fade_time
-					-- ))
-				-- elseif node_config.rotation == 180 then
-					-- vid:target(x1, node_config.tick_height, x2, y2):alpha(ramp( --reduce y
-						-- starts, ends, now, fade_time
-					-- ))
-				-- elseif node_config.rotation == 270 then
-					-- x2, y2 = y2, x2
-					-- vid:target(x1, y1, x2 - node_config.tick_height, y2):alpha(ramp( --reduce y
-						-- starts, ends, now, fade_time
-					-- ))
-				-- else
-					-- error("unsupported rotation")
-				-- end
-
+				vid:target(x1, y1, x2, y2):alpha(ramp(
+					starts, ends, now, fade_time
+				))
             end
         else
             vid = resource.load_video{
