@@ -400,8 +400,6 @@ local function Video(config)
     --   raw: use raw video?
     --   layer: video layer for raw videos
 
-    
-
     return function(starts, ends)
         wait_t(starts - 1)
 		local file = resource.open_file(config.asset_name)
@@ -424,10 +422,38 @@ local function Video(config)
 			-- end
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do			
-                vid:layer(config.layer or 5):start()
-                vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
-                    starts, ends, now, fade_time
-                ))
+                vid:layer(config.layer or 5):start():rotate(node_config.rotation)
+				
+				print(LOOK THERE)
+				print(x1, y1, x2, y2)
+				
+				if node_config.rotation == 0 then
+					vid:target(x1, y1, x2, y2 - node_config.tick_height):alpha(ramp( --reduce y
+						starts, ends, now, fade_time
+					))
+				elseif node_config.rotation == 90 then
+					vid:target(node_config.tick_height, y1, x2, y2):alpha(ramp( --reduce y
+						starts, ends, now, fade_time
+					))
+				elseif node_config.rotation == 180 then
+					vid:target(x1, node_config.tick_height, x2, y2):alpha(ramp( --reduce y
+						starts, ends, now, fade_time
+					))
+				elseif node_config.rotation == 270 then
+					vid:target(x1, y1, x2 - node_config.tick_height, y2):alpha(ramp( --reduce y
+						starts, ends, now, fade_time
+					))
+				else
+					error("unsupported rotation")
+				end
+				
+				
+				
+				
+				
+				
+				
+                
             end
         else
             vid = resource.load_video{
