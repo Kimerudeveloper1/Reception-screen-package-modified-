@@ -432,6 +432,7 @@ local function Video(config)
 						starts, ends, now, fade_time
 					))
 				elseif node_config.rotation == 90 then
+					x2, y2 = y2, x2 
 					vid:target(node_config.tick_height, y1, x2, y2):alpha(ramp( --reduce y
 						starts, ends, now, fade_time
 					))
@@ -440,6 +441,7 @@ local function Video(config)
 						starts, ends, now, fade_time
 					))
 				elseif node_config.rotation == 270 then
+					x2, y2 = y2, x2
 					vid:target(x1, y1, x2 - node_config.tick_height, y2):alpha(ramp( --reduce y
 						starts, ends, now, fade_time
 					))
