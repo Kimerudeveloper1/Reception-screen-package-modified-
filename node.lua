@@ -833,6 +833,7 @@ local function playlist()
             fn = TileChild{
                 asset_name = 'scroller',
                 blend = 1,
+				rotation = node_config.rotation
             },
             coord = tile_bottom_scroller,
         }
