@@ -50,7 +50,7 @@ local function draw_scroller(x, y, w, h, parent_config)
         y = NATIVE_WIDTH - h
 	end
 	
-	print(x, y, w, h)
+	-- print(x, y, w, h)
 	
     local now = sys.now()
     local delta = now - last
@@ -103,8 +103,8 @@ local function draw_scroller(x, y, w, h, parent_config)
             end
         end
 
-		print("SCROLLER")
-		print(x, y+3, item.text, h-8)
+		-- print("SCROLLER")
+		-- print(x, y+3, item.text, h-8)
         local text_width = font:write(
             x, y+3, item.text, h-8, 
             color.r, color.g, color.b, color.a

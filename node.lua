@@ -446,14 +446,7 @@ local function Video(config)
 				else
 					error("unsupported rotation")
 				end
-				
-				
-				
-				
-				
-				
-				
-                
+
             end
         else
             vid = resource.load_video{
