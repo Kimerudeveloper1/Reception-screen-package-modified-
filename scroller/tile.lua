@@ -100,7 +100,7 @@ local function draw_scroller(x, y, w, h)
 		print("SCROLLER")
 		print(x, y+3, item.text, h-8)
         local text_width = font:write(
-            y, x, item.text, h-8, 
+            x, y+3, item.text, h-8, 
             color.r, color.g, color.b, color.a
         )
         x = x + text_width

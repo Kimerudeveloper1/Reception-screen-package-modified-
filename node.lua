@@ -802,6 +802,8 @@ local function playlist()
 
     local function tile_bottom_scroller(s, e, now)
 		print("TILEBOTTOMSCROLLER")
+		return 0, 0, NATIVE_WIDTH, NATIVE_HEIGHT
+		
 		if node_config.rotation == 0 then
 			print(0, NATIVE_HEIGHT-node_config.tick_height, NATIVE_WIDTH, NATIVE_HEIGHT)
 			return 0, NATIVE_HEIGHT-node_config.tick_height, NATIVE_WIDTH, NATIVE_HEIGHT --Set 0
