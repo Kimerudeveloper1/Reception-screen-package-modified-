@@ -46,7 +46,7 @@ local last = sys.now()
 local function draw_scroller(x, y, w, h)
     -- scissors.set(x, y, x+w, y+h)
 	
-	y, w = w, y
+	y = 1900
 	
 	print(x, y, w, h)
 	
