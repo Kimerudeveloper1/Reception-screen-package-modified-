@@ -105,7 +105,7 @@ local function draw_scroller(x, y, w, h, parent_config)
 
 		-- print("SCROLLER")
 		-- print(x, y+3, item.text, h-8)
-        local text_width = font:layer(7):write(
+        local text_width = font:write(
             x, y+3, item.text, h-8, 
             color.r, color.g, color.b, color.a
         )

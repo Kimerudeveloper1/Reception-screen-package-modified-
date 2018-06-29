@@ -374,7 +374,7 @@ local function Image(config)
 					end
                 else
                     if config.transparent then
-						img:layer(6):draw(x1, y1, x2, y2, 0.5)
+						img:draw(x1, y1, x2, y2, 0.5)
 					else
 						img:draw(x1, y1, x2, y2, ramp(
 							starts, ends, now, fade_time
@@ -417,7 +417,7 @@ local function Video(config)
             vid:layer(-10)
 
             for now, x1, y1, x2, y2 in from_to(starts, ends) do			
-                vid:layer(5):start():rotate(node_config.rotation)
+                vid:layer(0):start():rotate(node_config.rotation)
 				vid:target(x1, y1, x2, y2):alpha(ramp( --reduce y
 						starts, ends, now, fade_time
 					))
