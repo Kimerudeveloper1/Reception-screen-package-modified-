@@ -47,7 +47,7 @@ local function draw_scroller(x, y, w, h, parent_config)
     -- scissors.set(x, y, x+w, y+h)
 	
 	if parent_config.rotation == 90 or parent_config.rotation == 270 then
-        w = NATIVE_WIDTH - h
+        y = NATIVE_WIDTH - h
 	end
 	
 	print(x, y, w, h)
