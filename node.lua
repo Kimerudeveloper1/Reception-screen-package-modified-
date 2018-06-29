@@ -424,7 +424,7 @@ local function Video(config)
             for now, x1, y1, x2, y2 in from_to(starts, ends) do			
                 vid:layer(config.layer or 5):start():rotate(node_config.rotation)
 				
-				print(LOOK THERE)
+				print("LOOK THERE")
 				print(x1, y1, x2, y2)
 				
 				if node_config.rotation == 0 then
