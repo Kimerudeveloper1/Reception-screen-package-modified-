@@ -107,5 +107,8 @@
             "type": "json",
             "default": {}
         }]
-    }]
+    }],
+	"permissions": {
+		"network": "Needs to use websocket"
+	}
 }

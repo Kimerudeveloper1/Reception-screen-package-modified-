@@ -127,6 +127,10 @@ local function Clock()
         ["clock/human"] = function(time)
             human_time = time
         end;
+		["socket/test"] = function(text)
+			print('LOOOOOOOOOOOOOOK THERE')
+            print(text)
+        end;
     }
 
     local function day_of_week()
