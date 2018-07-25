@@ -46,9 +46,9 @@ def init_websocket():
     ws.close()
 	
 def main():
-	thr = threading.Thread(target=init_websocket, args=(), kwargs={})
-	thr.start() # Will run "foo"
-	thr.is_alive() # Will return whether foo is running currently
+    thr = threading.Thread(target=init_websocket, args=(), kwargs={})
+    thr.start() # Will run "foo"
+    thr.is_alive() # Will return whether foo is running currently
 	
     while 1:
         now, ts = current_time()
