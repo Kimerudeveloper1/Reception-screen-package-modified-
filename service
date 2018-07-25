@@ -40,7 +40,8 @@ def init_websocket():
     ws = create_connection("ws://kimeru-tick.inside.cactussoft.biz/ws")
     while True:
         result = ws.recv()
-		NODE.send('/socket/test:%s' % result)
+        print(result)
+        NODE.send('/socket/test:%s' % result)
 		
     ws.close()
 	
