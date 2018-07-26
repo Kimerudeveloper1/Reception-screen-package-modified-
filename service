@@ -4,6 +4,7 @@ import sys
 import pytz
 import threading #added
 import requests
+import json
 from websocket import create_connection #added
 from datetime import datetime, timedelta
 from calendar import timegm
@@ -39,7 +40,7 @@ def send_clock(now, ts):
 
 def init_websocket():
     ticker = requests.get("https://blockchain.info/ticker").json
-    NODE.send('/socket/test' % ticker)
+    NODE.send('/socket/test' % json.dumps(ticker))
     time.sleep(1)
 
 def main():
