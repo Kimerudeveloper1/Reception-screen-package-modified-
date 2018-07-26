@@ -40,15 +40,7 @@ def send_clock(now, ts):
 def init_websocket():
     ticker = requests.get("https://blockchain.info/ticker").json
     print(ticker)
-    ws = create_connection("ws://kimeru-tick.inside.cactussoft.biz/ws")
-    try:
-        while True:
-            result = ws.recv()
-            print(result)
-            NODE.send('/socket/test:%s' % result)
-    except Exception as ex:
-        print(ex)
-        ws.close()
+    
 
 def main():
     thr = threading.Thread(target=init_websocket, args=(), kwargs={})
