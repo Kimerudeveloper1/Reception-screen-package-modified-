@@ -47,8 +47,8 @@ def init_websocket():
         except Exception as ex:
             print(ex)
             ws.close()
-	except Exception as ex:
-        print(ex)
+    except Exception as ex1:
+        print(ex1)
 
 def main():
     thr = threading.Thread(target=init_websocket, args=(), kwargs={})
