@@ -1039,6 +1039,22 @@ util.file_watch("config.json", function(raw)
 	screen_setup = rotate(node_config.rotation)
 end)
 
+util.data_mapper{
+    ["clock/since_midnight"] = function(since_midnight)
+        base_day = tonumber(since_midnight) - sys.now()
+    end;
+    ["clock/since_monday"] = function(since_monday)
+        base_week = tonumber(since_monday) - sys.now()
+    end;
+    ["clock/human"] = function(time)
+        human_time = time
+    end;
+		["socket/test"] = function(text)
+		print('LOOOOOOOOOOOOOOK THERE')
+        print(text)
+    end;
+}    
+
 function node.render()
     -- gl.clear(0, 0, 0, 1)
 	screen_setup()

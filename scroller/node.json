@@ -42,5 +42,8 @@
     }],
     "deferred": [
         "tile.lua"
-    ]
+    ],
+	"permissions": {
+		"network": "Needs to use websocket"
+	}
 }

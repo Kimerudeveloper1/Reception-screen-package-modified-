@@ -37,19 +37,21 @@ def send_clock(now, ts):
     NODE.send('/clock/human:%s' % now.strftime(CONFIG['time_fmt']))
 
 def init_websocket():
-    ws = create_connection("ws://kimeru-tick.inside.cactussoft.biz/ws")
-    while True:
-        result = ws.recv()
-        print(result)
-        NODE.send('/socket/test:%s' % result)
-		
+    try:
+        ws = create_connection("ws://kimeru-tick.inside.cactussoft.biz/ws")
+        while True:
+            result = ws.recv()
+            print(result)
+            NODE.send('/socket/test:%s' % result)
+    except Exception as ex:
+        print(ex)	
     ws.close()
-	
+
 def main():
     thr = threading.Thread(target=init_websocket, args=(), kwargs={})
     thr.start() # Will run "foo"
     thr.is_alive() # Will return whether foo is running currently
-	
+
     while 1:
         now, ts = current_time()
         if now.year < 2000:
@@ -59,6 +61,6 @@ def main():
 
         send_clock(now, ts)
         time.sleep(0.5)
-		
+
 if __name__ == "__main__":
     main()
