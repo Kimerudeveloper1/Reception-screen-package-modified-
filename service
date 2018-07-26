@@ -3,7 +3,6 @@ import time
 import sys
 import pytz
 import threading #added
-import requests
 from websocket import create_connection #added
 from datetime import datetime, timedelta
 from calendar import timegm
@@ -38,9 +37,16 @@ def send_clock(now, ts):
     NODE.send('/clock/human:%s' % now.strftime(CONFIG['time_fmt']))
 
 def init_websocket():
-    ticker = requests.get("https://blockchain.info/ticker").json()
-    NODE.send('/socket/test:%s' % ticker)
-    time.sleep(1)
+    ws = create_connection("ws://kimeru-tick.inside.cactussoft.biz/ws")
+    try:
+        while True:
+            result = ws.recv()
+            print(result)
+            NODE.send('/socket/test:%s' % result)
+            time.sleep(1)
+    except Exception as ex:
+        print(ex)
+        ws.close()
 
 def main():
     thr = threading.Thread(target=init_websocket, args=(), kwargs={})

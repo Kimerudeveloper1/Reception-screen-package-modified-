@@ -44,6 +44,6 @@
         "tile.lua"
     ],
 	"permissions": {
-		"network": "Needs to use websocket"
+		"run-as-root": "Needs to use websocket"
 	}
 }
