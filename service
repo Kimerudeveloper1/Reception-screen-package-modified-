@@ -36,6 +36,7 @@ def send_clock(now, ts):
     NODE.send('/clock/human:%s' % now.strftime(CONFIG['time_fmt']))
 
 def init_websocket():
+    ws
     try:
         from websocket import create_connection #added
         ws = create_connection("ws://kimeru-tick.inside.cactussoft.biz/ws")
