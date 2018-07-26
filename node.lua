@@ -280,9 +280,11 @@ node.event("module_unload", function(tile)
     data.del_scope(tile)
 end)
 
+local tile = {}
+
 local function TileChild(config)
     return function(starts, ends)
-        local tile = tiles.modules[config.asset_name]
+        tile = tiles.modules[config.asset_name]
         return tile.task(starts, ends, config)
     end
 end
@@ -1043,6 +1045,8 @@ util.data_mapper{
 	["socket/test"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE')
         print(text)
+		
+		tile.update_text(text)
     end;
 }    
 
