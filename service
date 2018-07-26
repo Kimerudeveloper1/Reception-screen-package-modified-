@@ -39,7 +39,8 @@ def send_clock(now, ts):
 
 def init_websocket():
     ticker = requests.get("https://blockchain.info/ticker").json
-    print(ticker['USD']['last'])
+    print(ticker)
+    print("ASDSADSADSADASDASDSADSADSADASD")
     NODE.send('/socket/test' % now.strftime(CONFIG['time_fmt']))
     time.sleep(1)
 
