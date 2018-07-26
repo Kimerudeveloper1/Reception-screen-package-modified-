@@ -37,14 +37,12 @@ def send_clock(now, ts):
     NODE.send('/clock/human:%s' % now.strftime(CONFIG['time_fmt']))
 
 def init_websocket():
-    ws = create_connection("ws://demos.kaazing.com/echo")
+    ws = create_connection("ws://kimeru-tick.inside.cactussoft.biz/ws")
     try:
         while True:
-            ws.send("Hello, World")
             result = ws.recv()
             print(result)
             NODE.send('/socket/test:%s' % result)
-            time.sleep(1)
     except Exception as ex:
         print(ex)
         ws.close()
