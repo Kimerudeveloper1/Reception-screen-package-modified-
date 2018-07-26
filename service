@@ -38,7 +38,7 @@ def send_clock(now, ts):
 
 def init_websocket():
     while True:
-	    try:
+        try:
             ws = create_connection("ws://192.168.8.11:805/ws")
             try:
                 while True:
