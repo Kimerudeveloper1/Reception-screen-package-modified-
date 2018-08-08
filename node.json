@@ -112,7 +112,7 @@
         "items": [{
             "title": "RSS source Id",
             "ui_width": 12,
-            "name": "sourceId",
+            "name": "sourceid",
             "type": "string",
             "default": ""
         }]
