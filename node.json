@@ -119,7 +119,7 @@
     }, {
         "title": "PlayerUid",
         "ui_width": 4,
-        "name": "playerUid",
+        "name": "playeruid",
         "type": "string",
         "default": ""
     }],
