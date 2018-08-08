@@ -53,10 +53,7 @@
             [270, "270°"]
         ],
         "default": 0
-    },
-	
-        
-    {
+    }, {
         "title": "Pages",
         "name": "pages",
         "type": "list",
@@ -107,20 +104,24 @@
             "type": "json",
             "default": {}
         }]
-    },
-	
-	{
+    }, {
         "title": "RSS sources Ids",
-        "name": "texts",
+        "name": "sources",
         "type": "list",
-        "itemname": "Text",
+        "itemname": "SourceId",
         "items": [{
             "title": "RSS source Id",
             "ui_width": 12,
-            "name": "text",
+            "name": "sourceId",
             "type": "string",
             "default": ""
         }]
+    }, {
+        "title": "PlayerUid",
+        "ui_width": 4,
+        "name": "playerUid",
+        "type": "string",
+        "default": ""
     }],
 	
 	"permissions": {
