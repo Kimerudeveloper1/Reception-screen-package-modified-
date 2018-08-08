@@ -107,7 +107,22 @@
             "type": "json",
             "default": {}
         }]
+    },
+	
+	{
+        "title": "RSS sources Ids",
+        "name": "texts",
+        "type": "list",
+        "itemname": "Text",
+        "items": [{
+            "title": "RSS source Id",
+            "ui_width": 12,
+            "name": "text",
+            "type": "string",
+            "default": ""
+        }]
     }],
+	
 	"permissions": {
 		"network": "Needs to use websocket"
 	}

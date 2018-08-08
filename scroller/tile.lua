@@ -133,11 +133,12 @@ function M.updated_config_json(config)
     color = config.color
     speed = config.speed
 
-    content.__myself__ = {}
-    local texts = content.__myself__
-    for idx = 1, #config.texts do
-        texts[#texts+1] = {text = config.texts[idx].text}
-    end
+	-- NOT NEED TO GET TEXT FROM CONFIG 
+    -- content.__myself__ = {}
+    -- local texts = content.__myself__
+    -- for idx = 1, #config.texts do
+        -- texts[#texts+1] = {text = config.texts[idx].text}
+    -- end
 end
 
 function M.update_text(newText)
