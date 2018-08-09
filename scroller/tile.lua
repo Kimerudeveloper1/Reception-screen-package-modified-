@@ -162,6 +162,8 @@ function M.update_text(newTicker)
 	for idx = 1, #texts do
 		print(texts[idx])
 	end
+	
+	content.__myself__ = texts
 end
 
 function M.task(starts, ends, parent_config)
