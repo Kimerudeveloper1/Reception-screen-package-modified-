@@ -48,8 +48,10 @@ def init_websocket():
                 while True:
                     result = ws.recv_frame()
                     data = result.data
-                    while result.fin != 1:
+                    while result.fin == 0:
+                        result = ws.recv_frame()
                         data = data + result.data
+                    
                     NODE.send('/socket/ticker:%s' % data)
             except Exception as ex:
                 print(ex)

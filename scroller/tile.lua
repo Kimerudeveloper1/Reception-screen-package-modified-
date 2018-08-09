@@ -142,6 +142,9 @@ function M.updated_config_json(config)
 end
 
 function M.update_text(newTicker)
+	
+	print(string.len(newTicker))
+	
     local oldTexts = content.__myself__
 	
 	local newTextArray = json.decode(newTicker)
