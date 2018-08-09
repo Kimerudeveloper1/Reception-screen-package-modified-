@@ -161,6 +161,7 @@ function M.update_text(newTicker)
 	print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
 	for idx = 1, #texts do
 		print(texts[idx])
+	end
 end
 
 function M.task(starts, ends, parent_config)
