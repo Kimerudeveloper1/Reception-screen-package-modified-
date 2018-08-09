@@ -155,12 +155,12 @@ function M.update_text(newTicker)
 	end
 
 	for idx = 1, #newTextArray do
-		texts[#texts + 1] = newTextArray[idx]	
+		texts[#texts + 1] = {text = newTextArray[idx]}	
 	end
 	
 	print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
 	for idx = 1, #texts do
-		print(texts[idx])
+		print(texts[idx].text)
 	end
 	
 	content.__myself__ = texts
