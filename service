@@ -46,7 +46,7 @@ def init_websocket():
             ws = create_connection(url[:-1])
             try:
                 while True:
-                    result = ws.recv_frame
+                    result = ws.recv_frame()
                     data = result.data
                     while result.fin != 1:
                         data = data + result.data
