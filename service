@@ -41,7 +41,7 @@ def init_websocket():
         try:
             playerUid = CONFIG["playeruid"]
             url = "ws://192.168.8.11:805/ws/" + playerUid + "?"
-            for source in CONFIG["sources"]
+            for source in CONFIG["sources"]:
                 url += "sources=" + source["sourceid"] + "&"
             ws = create_connection(url[:-1])
             try:
