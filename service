@@ -52,7 +52,7 @@ def init_websocket():
                         result = ws.recv_frame()
                         data = data + result.data
                     
-                    NODE.send('/socket/ticker:%s' % data)
+                    NODE.send('/socket/ticker:%s' % len(data))
             except Exception as ex:
                 print(ex)
                 ws.close()
