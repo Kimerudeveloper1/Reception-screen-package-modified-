@@ -46,8 +46,11 @@ def init_websocket():
             ws = create_connection(url[:-1])
             try:
                 while True:
-                    result = ws.recv()
-                    NODE.send('/socket/ticker:%s' % result)
+					result = ws.recv_frame
+					data = result.data
+					while result.fin != 1:
+						data = data + result.data
+                    NODE.send('/socket/ticker:%s' % data)
             except Exception as ex:
                 print(ex)
                 ws.close()
