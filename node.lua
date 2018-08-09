@@ -1042,7 +1042,7 @@ util.file_watch("config.json", function(raw)
 end)
 
 util.data_mapper{
-	["socket/test"] = function(text)
+	["socket/ticker"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE')
         print(text)
 		

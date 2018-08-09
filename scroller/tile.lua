@@ -141,9 +141,26 @@ function M.updated_config_json(config)
     -- end
 end
 
-function M.update_text(newText)
-    local texts = content.__myself__
-    texts[#texts+1] = {text = newText}
+function M.update_text(newTicker)
+    local oldTexts = content.__myself__
+	
+	local newTextArray = json.decode(newTicker)
+	local texts
+	
+	local sum = #oldTexts + #newTextArray
+	if sum > 20 then
+		for idx = 1, #oldTexts - sum + 20 do
+			texts[idx] = oldTexts[sum - 20 + idx]	
+		end
+	end
+
+	for idx = 1, #texts do
+		texts[#texts + 1] = newTextArray[idx]	
+	end
+	
+	print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
+	for idx = 1, #texts do
+		print(texts[idx])
 end
 
 function M.task(starts, ends, parent_config)

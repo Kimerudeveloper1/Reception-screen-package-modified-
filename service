@@ -35,15 +35,19 @@ def send_clock(now, ts):
     NODE.send('/clock/since_midnight:%f' % since_midnight)
     NODE.send('/clock/since_monday:%f' % since_monday)
     NODE.send('/clock/human:%s' % now.strftime(CONFIG['time_fmt']))
-
+    
 def init_websocket():
     while True:
         try:
-            ws = create_connection("ws://192.168.8.11:805/ws")
+            playerUid = CONFIG["playeruid"]
+            url = "ws://192.168.8.11:805/ws/" + playerUid + "?"
+            for source in CONFIG["sources"]
+                url += "sources=" + source["sourceid"] + "&"
+            ws = create_connection(url[:-1])
             try:
                 while True:
                     result = ws.recv()
-                    NODE.send('/socket/test:%s' % result)
+                    NODE.send('/socket/ticker:%s' % result)
             except Exception as ex:
                 print(ex)
                 ws.close()
