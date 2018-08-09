@@ -145,7 +145,7 @@ function M.update_text(newTicker)
     local oldTexts = content.__myself__
 	
 	local newTextArray = json.decode(newTicker)
-	local texts
+	local texts = {}
 	
 	local sum = #oldTexts + #newTextArray
 	if sum > 20 then
@@ -154,7 +154,7 @@ function M.update_text(newTicker)
 		end
 	end
 
-	for idx = 1, #texts do
+	for idx = 1, #newTextArray do
 		texts[#texts + 1] = newTextArray[idx]	
 	end
 	
