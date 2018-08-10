@@ -183,13 +183,13 @@ local function updateTicker()
 			
 			data[#data + 1] = text
 		end;
-		["socket/end"] = function(text2)
+		["socket/end"] = function(text)
 			print('LOOOOOOOOOOOOOOK THERE LAST')
-			print(text2)
-			data[#data + 1] = text2
+			print(text)
+			data[#data + 1] = text
 			
 			local s = concatter(data)
-			print(s:sub(3861, 3991))
+			print(s:sub(38691, 3891))
 			local newTextArray = json.decode(s)
 			local texts = {}
 			for idx = 1, #newTextArray do
@@ -211,6 +211,7 @@ end;
 
 
 function M.task(starts, ends, parent_config)
+	updateTicker()
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
         draw_scroller(x1, y1, x2-x1, y2-y1, parent_config)
     end
