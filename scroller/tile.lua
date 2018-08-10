@@ -141,7 +141,7 @@ function M.updated_config_json(config)
     -- end
 end
 
-local data = ""
+local data = {}
 util.data_mapper{
 	["socket/ticker"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE')
@@ -171,13 +171,13 @@ util.data_mapper{
 		-- content.__myself__ = texts
 		-- end;
 		
-		data = data .. text
+		data[#data + 1] = text
 	end;
 	["socket/tickerEnd"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE LAST')
         print(text)
-		data = data + text
-		local newTextArray = json.decode(data)
+		data[#data + 1] = text
+		local newTextArray = json.decode(listvalues(data))
 		local texts = {}
 		for idx = 1, #newTextArray do
 			texts[idx] = {text = newTextArray[idx]}
@@ -194,6 +194,14 @@ util.data_mapper{
 		data = ""
 	end;
 }
+
+function listvalues(s)
+    local t = { }
+    for k,v in ipairs(s) do
+        t[#t+1] = tostring(v)
+    end
+    return table.concat(t,"")
+end
 
 function M.task(starts, ends, parent_config)
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
