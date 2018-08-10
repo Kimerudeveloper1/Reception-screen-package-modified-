@@ -141,10 +141,8 @@ function M.updated_config_json(config)
     -- end
 end
 
+local data = {}
 util.data_mapper{
-
-	local data = {}
-
 	["socket/ticker"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE')
         print(text)
