@@ -142,9 +142,9 @@ function M.updated_config_json(config)
 end
 
 util.data_mapper{
-	["socket/ticker"] = function(text)
+	["socket/ticker"] = function(newText)
 		print('LOOOOOOOOOOOOOOK THERE')
-        print(text)
+        print(newText)
 		
 		-- local oldTexts = content.__myself__
 	
@@ -170,7 +170,9 @@ util.data_mapper{
 		-- content.__myself__ = texts
 		-- end;
 		
-		content.__myself__ = {text = text}
+		local texts = {}
+		texts[#texts + 1] = {text = newText}
+		content.__myself__ = texts
 }
 
 function M.task(starts, ends, parent_config)
