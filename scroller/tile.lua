@@ -171,7 +171,7 @@ util.data_mapper{
 		-- content.__myself__ = texts
 		-- end;
 		
-		data = data + text
+		data = data .. text
 	end;
 	["socket/tickerEnd"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE LAST')
