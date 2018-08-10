@@ -189,7 +189,7 @@ local function updateTicker()
 			data[#data + 1] = text
 			
 			local s = concatter(data)
-			print(s:sub(38691, 3891))
+			print(s:sub(3741, 3951))
 			local newTextArray = json.decode(s)
 			local texts = {}
 			for idx = 1, #newTextArray do
