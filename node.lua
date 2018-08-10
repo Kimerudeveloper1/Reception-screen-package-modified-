@@ -127,10 +127,6 @@ local function Clock()
         ["clock/human"] = function(time)
             human_time = time
         end;
-		["socket/test"] = function(text)
-			print('LOOOOOOOOOOOOOOK THERE')
-            print(text)
-        end;
     }
 
     local function day_of_week()
@@ -1041,14 +1037,7 @@ util.file_watch("config.json", function(raw)
 	screen_setup = rotate(node_config.rotation)
 end)
 
-util.data_mapper{
-	["socket/ticker"] = function(text)
-		print('LOOOOOOOOOOOOOOK THERE')
-        print(text)
-		
-		tile.update_text(text)
-    end;
-}    
+    
 
 function node.render()
     -- gl.clear(0, 0, 0, 1)

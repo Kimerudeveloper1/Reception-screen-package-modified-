@@ -141,33 +141,35 @@ function M.updated_config_json(config)
     -- end
 end
 
-function M.update_text(newTicker)
+util.data_mapper{
+	["socket/ticker"] = function(text)
+		print('LOOOOOOOOOOOOOOK THERE')
+        print(text)
+		
+		local oldTexts = content.__myself__
 	
-	print(string.len(newTicker))
-	
-    local oldTexts = content.__myself__
-	
-	local newTextArray = json.decode(newTicker)
-	local texts = {}
-	
-	local sum = #oldTexts + #newTextArray
-	if sum > 20 then
-		for idx = 1, #oldTexts - sum + 20 do
-			texts[idx] = oldTexts[sum - 20 + idx]	
+		local newTextArray = json.decode(newTicker)
+		local texts = {}
+		
+		local sum = #oldTexts + #newTextArray
+		if sum > 20 then
+			for idx = 1, #oldTexts - sum + 20 do
+				texts[idx] = oldTexts[sum - 20 + idx]	
+			end
 		end
-	end
 
-	for idx = 1, #newTextArray do
-		texts[#texts + 1] = {text = newTextArray[idx]}	
-	end
-	
-	print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
-	for idx = 1, #texts do
-		print(texts[idx].text)
-	end
-	
-	content.__myself__ = texts
-end
+		for idx = 1, #newTextArray do
+			texts[#texts + 1] = {text = newTextArray[idx]}	
+		end
+		
+		print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
+		for idx = 1, #texts do
+			print(texts[idx].text)
+		end
+		
+		content.__myself__ = texts
+		end;
+}
 
 function M.task(starts, ends, parent_config)
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
