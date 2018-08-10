@@ -172,7 +172,7 @@ util.data_mapper{
 		-- end;
 		
 		data = data + text
-	end
+	end;
 	["socket/tickerEnd"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE LAST')
         print(text)
@@ -192,7 +192,7 @@ util.data_mapper{
 		content.__myself__ = texts
 		
 		data = {}
-	end
+	end;
 }
 
 function M.task(starts, ends, parent_config)
