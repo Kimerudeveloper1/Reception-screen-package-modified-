@@ -195,7 +195,7 @@ util.data_mapper{
 	end;
 }
 
-function listvalues(s)
+local function listvalues(s)
     local t = { }
     for k,v in ipairs(s) do
         t[#t+1] = tostring(v)
