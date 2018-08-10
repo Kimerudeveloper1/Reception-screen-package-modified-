@@ -185,7 +185,10 @@ util.data_mapper{
 		print('LOOOOOOOOOOOOOOK THERE LAST')
         print(text)
 		data[#data + 1] = text
-		local newTextArray = json.decode(concatter(data))
+		
+		local s = concatter(data)
+		print(s:sub(58880:58900))
+		local newTextArray = json.decode(s)
 		local texts = {}
 		for idx = 1, #newTextArray do
 			texts[idx] = {text = newTextArray[idx]}
