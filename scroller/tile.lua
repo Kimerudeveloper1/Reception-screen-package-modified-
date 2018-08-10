@@ -148,7 +148,7 @@ util.data_mapper{
 		
 		local oldTexts = content.__myself__
 	
-		local newTextArray = json.decode(newTicker)
+		local newTextArray = json.decode(text)
 		local texts = {}
 		
 		local sum = #oldTexts + #newTextArray

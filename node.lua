@@ -1035,9 +1035,7 @@ util.file_watch("config.json", function(raw)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 	
 	screen_setup = rotate(node_config.rotation)
-end)
-
-    
+end)    
 
 function node.render()
     -- gl.clear(0, 0, 0, 1)
