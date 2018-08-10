@@ -181,10 +181,10 @@ util.data_mapper{
 		
 		data[#data + 1] = text
 	end;
-	["socket/tickerEnd"] = function(text)
+	["socket/tickerEnd"] = function(text2)
 		print('LOOOOOOOOOOOOOOK THERE LAST')
-        print(text)
-		data[#data + 1] = text
+        print(text2)
+		data[#data + 1] = text2
 		
 		local s = concatter(data)
 		print(s:sub(58880, 58900))
