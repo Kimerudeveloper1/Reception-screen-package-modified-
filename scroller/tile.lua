@@ -204,7 +204,7 @@ util.data_mapper{
 		
 		content.__myself__ = texts
 		
-		data = ""
+		data = {}
 	end;
 }
 
