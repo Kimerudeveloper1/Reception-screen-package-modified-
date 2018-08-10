@@ -45,7 +45,7 @@ def init_websocket():
 		text += str(i) + ', '
 	text = text[:-2] + ']'
 	
-	bufSize = 100
+	bufSize = 1000
 	length = len(text)
 	chunksNumber = length // bufSize
 	lastChunkSize = length % bufSize
