@@ -50,8 +50,10 @@ def init_websocket():
 	chunksNumber = length // bufSize
 	lastChunkSize = length % bufSize
 	
-
-	NODE.send('/socket/tickerEnd:%s' % '2')
+	for i in xrange(chunksNumber-1):
+		NODE.send('/socket/ticker:%s' % '1')
+		
+	NODE.send('/socket/end:%s' % '2')
     # while True:
         # try:
             # url = "ws://192.168.8.11:805/ws/" + CONFIG['playeruid'] + "?"

@@ -181,7 +181,7 @@ util.data_mapper{
 		
 		data[#data + 1] = text
 	end;
-	["socket/tickerEnd"] = function(text2)
+	["socket/end"] = function(text2)
 		print('LOOOOOOOOOOOOOOK THERE LAST')
         print(text2)
 		data[#data + 1] = text2
