@@ -174,6 +174,15 @@ util.data_mapper{
 		data[#data + 1] = text
 	end;
 	["socket/tickerEnd"] = function(text)
+	
+		local function listvalues(s)
+			local t = { }
+			for k,v in ipairs(s) do
+				t[#t+1] = tostring(v)
+			end
+			return table.concat(t,"")
+		end
+	
 		print('LOOOOOOOOOOOOOOK THERE LAST')
         print(text)
 		data[#data + 1] = text
@@ -195,13 +204,6 @@ util.data_mapper{
 	end;
 }
 
-local function listvalues(s)
-    local t = { }
-    for k,v in ipairs(s) do
-        t[#t+1] = tostring(v)
-    end
-    return table.concat(t,"")
-end
 
 function M.task(starts, ends, parent_config)
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
