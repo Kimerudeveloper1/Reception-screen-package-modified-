@@ -185,7 +185,6 @@ util.data_mapper{
 		end
 		
 		content.__myself__ = texts
-		end;
 	end;
 }
 
