@@ -154,58 +154,38 @@ local data = {}
 
 util.data_mapper{
 	["socket/ticker"] = function(text)
-		print('LOOOOOOOOOOOOOOK THERE')
-		print(text)
-		
-		-- local oldTexts = content.__myself__
-	
-		-- local newTextArray = json.decode(text)
-		-- local texts = {}
-		
-		-- local sum = #oldTexts + #newTextArray
-		-- if sum > 20 then
-			-- for idx = 1, #oldTexts - sum + 20 do
-				-- texts[idx] = oldTexts[sum - 20 + idx]	
-			-- end
-		-- end
-
-		-- for idx = 1, #newTextArray do
-			-- texts[#texts + 1] = {text = newTextArray[idx]}	
-		-- end
-		
-		-- print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
-		-- for idx = 1, #texts do
-			-- print(texts[idx].text)
-		-- end
-		
-		-- content.__myself__ = texts
-		-- end;
-		
 		data[#data + 1] = text
 	end;
 	["socket/end"] = function(text)
-		print('LOOOOOOOOOOOOOOK THERE LAST')
-		print(text)
 		data[#data + 1] = text
 		
 		local s = concatter(data)
 		
 		local newTextArray = json.decode(s)
-		print(#newTextArray)
-		local texts = {}
-		for idx = 1, #newTextArray do
-			texts[idx] = {text = newTextArray[idx]}
-		end
-		-- end
+		print(#newTextArray)	
 		
-		print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
+		local oldTexts = content.__myself__
+	
+		local texts = {}
+		
+		local sum = #oldTexts + #newTextArray
+		if sum > 20 then
+			for idx = 1, #oldTexts - sum + 20 do
+				texts[idx] = oldTexts[sum - 20 + idx]	
+			end
+		end
+
+		for idx = 1, #newTextArray do
+			texts[#texts + 1] = {text = newTextArray[idx]}	
+		end
+		
+		print("UPDATED TICKER TEXT !!!!!!!!!!!!!!!")
 		for idx = 1, #texts do
 			print(texts[idx].text)
 		end
 		
 		content.__myself__ = texts
-		
-		data = {}
+		end;
 	end;
 }
 

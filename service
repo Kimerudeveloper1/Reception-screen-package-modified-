@@ -36,15 +36,8 @@ def send_clock(now, ts):
     NODE.send('/clock/since_monday:%f' % since_monday)
     NODE.send('/clock/human:%s' % now.strftime(CONFIG['time_fmt']))
     
-def init_websocket():
-	time.sleep(5)
 	
-	text = '['
-	
-	for i in xrange(1000):
-		text += str(i) + ', '
-	text = text[:-2] + ']'
-	
+def send_to_lua(text):
 	bufSize = 1000
 	length = len(text)
 	chunksNumber = length // bufSize
@@ -53,22 +46,24 @@ def init_websocket():
 	for i in xrange(chunksNumber):
 		NODE.send('/socket/ticker:%s' % text[i*bufSize:(i+1)*bufSize])
 	NODE.send('/socket/end:%s' % text[chunksNumber*bufSize:chunksNumber*bufSize + lastChunkSize])
-    # while True:
-        # try:
-            # url = "ws://192.168.8.11:805/ws/" + CONFIG['playeruid'] + "?"
-            # for source in CONFIG["sources"]:
-                # url += "sources=" + source["sourceid"] + "&"
+	
+def init_websocket():
+    while True:
+        try:
+            url = "ws://192.168.8.11:805/ws/" + CONFIG['playeruid'] + "?"
+            for source in CONFIG["sources"]:
+                url += "sources=" + source["sourceid"] + "&"
 
-            # ws = create_connection(url[:-1])
-            # try:
-                # while True:
-                    # result = ws.recv()
-                    # NODE.send('/socket/ticker:%s' % result)
-            # except Exception as ex:
-                # print(ex)
-                # ws.close()
-        # except Exception as ex1:
-            # print(ex1)
+            ws = create_connection(url[:-1])
+            try:
+                while True:
+                    result = ws.recv()
+                    send_to_lua(result)
+            except Exception as ex:
+                print(ex)
+                ws.close()
+        except Exception as ex1:
+            print(ex1)
 def main():
     thr = threading.Thread(target=init_websocket, args=(), kwargs={})
     thr.start() # Will run "foo"
