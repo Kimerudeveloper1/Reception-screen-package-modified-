@@ -141,6 +141,14 @@ function M.updated_config_json(config)
     -- end
 end
 
+
+local concatter = function listvalues(s)
+	local t = { }
+	for k,v in ipairs(s) do
+		t[#t+1] = tostring(v)
+	end
+	return table.concat(t,"")
+end
 local data = {}
 util.data_mapper{
 	["socket/ticker"] = function(text)
@@ -174,19 +182,10 @@ util.data_mapper{
 		data[#data + 1] = text
 	end;
 	["socket/tickerEnd"] = function(text)
-	
-		local function listvalues(s)
-			local t = { }
-			for k,v in ipairs(s) do
-				t[#t+1] = tostring(v)
-			end
-			return table.concat(t,"")
-		end
-	
 		print('LOOOOOOOOOOOOOOK THERE LAST')
         print(text)
 		data[#data + 1] = text
-		local newTextArray = json.decode(listvalues(data))
+		local newTextArray = json.decode(concatter(data))
 		local texts = {}
 		for idx = 1, #newTextArray do
 			texts[idx] = {text = newTextArray[idx]}
