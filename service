@@ -41,7 +41,7 @@ def init_websocket():
 	
 	text = '['
 	
-	for i in xrange(10000):
+	for i in xrange(1000):
 		text += str(i) + ', '
 	text = text[:-1] + ']'
 	

@@ -187,7 +187,7 @@ util.data_mapper{
 		data[#data + 1] = text2
 		
 		local s = concatter(data)
-		print(s:sub(57880, 57900))
+		print(s:sub(0, 20))
 		local newTextArray = json.decode(s)
 		local texts = {}
 		for idx = 1, #newTextArray do
