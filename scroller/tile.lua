@@ -141,73 +141,72 @@ function M.updated_config_json(config)
     -- end
 end
 
-local function updateTicker()
-	local concatter = function(s)
-		local t = { }
-		for k,v in ipairs(s) do
-			t[#t+1] = tostring(v)
-		end
-		return table.concat(t,"")
-	end
-	
-	local data = {}
-	
-	util.data_mapper{
-		["socket/ticker"] = function(text)
-			print('LOOOOOOOOOOOOOOK THERE')
-			print(text)
-			
-			-- local oldTexts = content.__myself__
-		
-			-- local newTextArray = json.decode(text)
-			-- local texts = {}
-			
-			-- local sum = #oldTexts + #newTextArray
-			-- if sum > 20 then
-				-- for idx = 1, #oldTexts - sum + 20 do
-					-- texts[idx] = oldTexts[sum - 20 + idx]	
-				-- end
-			-- end
 
-			-- for idx = 1, #newTextArray do
-				-- texts[#texts + 1] = {text = newTextArray[idx]}	
+local concatter = function(s)
+	local t = { }
+	for k,v in ipairs(s) do
+		t[#t+1] = tostring(v)
+	end
+	return table.concat(t,"")
+end
+
+local data = {}
+
+util.data_mapper{
+	["socket/ticker"] = function(text)
+		print('LOOOOOOOOOOOOOOK THERE')
+		print(text)
+		
+		-- local oldTexts = content.__myself__
+	
+		-- local newTextArray = json.decode(text)
+		-- local texts = {}
+		
+		-- local sum = #oldTexts + #newTextArray
+		-- if sum > 20 then
+			-- for idx = 1, #oldTexts - sum + 20 do
+				-- texts[idx] = oldTexts[sum - 20 + idx]	
 			-- end
-			
-			-- print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
-			-- for idx = 1, #texts do
-				-- print(texts[idx].text)
-			-- end
-			
-			-- content.__myself__ = texts
-			-- end;
-			
-			data[#data + 1] = text
-		end;
-		["socket/end"] = function(text)
-			print('LOOOOOOOOOOOOOOK THERE LAST')
-			print(text)
-			data[#data + 1] = text
-			
-			local s = concatter(data)
-			print(s:sub(3741, 3951))
-			local newTextArray = json.decode(s)
-			local texts = {}
-			for idx = 1, #newTextArray do
-				texts[idx] = {text = newTextArray[idx]}
-			end
-			-- end
-			
-			print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
-			for idx = 1, #texts do
-				print(texts[idx].text)
-			end
-			
-			content.__myself__ = texts
-			
-			data = ""
-		end;
-	}
-end;
+		-- end
+
+		-- for idx = 1, #newTextArray do
+			-- texts[#texts + 1] = {text = newTextArray[idx]}	
+		-- end
+		
+		-- print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
+		-- for idx = 1, #texts do
+			-- print(texts[idx].text)
+		-- end
+		
+		-- content.__myself__ = texts
+		-- end;
+		
+		data[#data + 1] = text
+	end;
+	["socket/end"] = function(text)
+		print('LOOOOOOOOOOOOOOK THERE LAST')
+		print(text)
+		data[#data + 1] = text
+		
+		local s = concatter(data)
+		print(s:sub(3741))
+		local newTextArray = json.decode(s)
+		local texts = {}
+		for idx = 1, #newTextArray do
+			texts[idx] = {text = newTextArray[idx]}
+		end
+		-- end
+		
+		print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
+		for idx = 1, #texts do
+			print(texts[idx].text)
+		end
+		
+		content.__myself__ = texts
+		
+		data = ""
+	end;
+}
 
 
 function M.task(starts, ends, parent_config)
