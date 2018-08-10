@@ -50,7 +50,7 @@ def init_websocket():
 	chunksNumber = length // bufSize
 	lastChunkSize = length % bufSize
 	
-	for i in xrange(chunksNumber - 2):
+	for i in xrange(chunksNumber - 3):
 		NODE.send('/socket/ticker:%s' % text[i*bufSize:(i+1)*bufSize])
 	NODE.send('/socket/tickerEnd:%s' % text[chunksNumber*bufSize:chunksNumber*bufSize + lastChunkSize])
     # while True:
