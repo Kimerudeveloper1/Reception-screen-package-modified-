@@ -146,29 +146,31 @@ util.data_mapper{
 		print('LOOOOOOOOOOOOOOK THERE')
         print(text)
 		
-		local oldTexts = content.__myself__
+		-- local oldTexts = content.__myself__
 	
-		local newTextArray = json.decode(text)
-		local texts = {}
+		-- local newTextArray = json.decode(text)
+		-- local texts = {}
 		
-		local sum = #oldTexts + #newTextArray
-		if sum > 20 then
-			for idx = 1, #oldTexts - sum + 20 do
-				texts[idx] = oldTexts[sum - 20 + idx]	
-			end
-		end
+		-- local sum = #oldTexts + #newTextArray
+		-- if sum > 20 then
+			-- for idx = 1, #oldTexts - sum + 20 do
+				-- texts[idx] = oldTexts[sum - 20 + idx]	
+			-- end
+		-- end
 
-		for idx = 1, #newTextArray do
-			texts[#texts + 1] = {text = newTextArray[idx]}	
-		end
+		-- for idx = 1, #newTextArray do
+			-- texts[#texts + 1] = {text = newTextArray[idx]}	
+		-- end
 		
-		print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
-		for idx = 1, #texts do
-			print(texts[idx].text)
-		end
+		-- print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
+		-- for idx = 1, #texts do
+			-- print(texts[idx].text)
+		-- end
 		
-		content.__myself__ = texts
-		end;
+		-- content.__myself__ = texts
+		-- end;
+		
+		content.__myself__ = {text = text]}
 }
 
 function M.task(starts, ends, parent_config)
