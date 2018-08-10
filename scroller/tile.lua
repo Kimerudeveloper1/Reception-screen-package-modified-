@@ -173,6 +173,7 @@ util.data_mapper{
 		local texts = {}
 		texts[#texts + 1] = {text = newText}
 		content.__myself__ = texts
+		end
 }
 
 function M.task(starts, ends, parent_config)
