@@ -141,7 +141,7 @@ function M.updated_config_json(config)
     -- end
 end
 
-local data = {}
+local data = ""
 util.data_mapper{
 	["socket/ticker"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE')
@@ -191,7 +191,7 @@ util.data_mapper{
 		
 		content.__myself__ = texts
 		
-		data = {}
+		data = ""
 	end;
 }
 
