@@ -142,7 +142,7 @@ function M.updated_config_json(config)
 end
 
 
-local concatter = function listvalues(s)
+local concatter = function(s)
 	local t = { }
 	for k,v in ipairs(s) do
 		t[#t+1] = tostring(v)
