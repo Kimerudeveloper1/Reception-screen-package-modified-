@@ -43,7 +43,7 @@ def init_websocket():
 	
 	for i in xrange(1000):
 		text += str(i) + ', '
-	text = text[:-1] + ']'
+	text = text[:-2] + ']'
 	
 	bufSize = 1000
 	length = len(text)
