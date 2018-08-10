@@ -144,7 +144,7 @@ end
 util.data_mapper{
 	["socket/ticker"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE')
-        print(newText)
+        print(text)
 		
 		-- local oldTexts = content.__myself__
 	
