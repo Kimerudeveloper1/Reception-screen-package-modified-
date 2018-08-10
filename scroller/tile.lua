@@ -142,7 +142,7 @@ function M.updated_config_json(config)
 end
 
 util.data_mapper{
-	["socket/ticker"] = function(newText)
+	["socket/ticker"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE')
         print(newText)
 		
@@ -170,8 +170,18 @@ util.data_mapper{
 		-- content.__myself__ = texts
 		-- end;
 		
+		local newTextArray = json.decode(text)
 		local texts = {}
-		texts[#texts + 1] = {text = newText}
+		for idx = 1, #newTextArray do
+			texts[idx] = {text = newTextArray[idx]}
+		end
+		-- end
+		
+		print("UPDATE TICKER TEXT !!!!!!!!!!!!!!!")
+		for idx = 1, #texts do
+			print(texts[idx].text)
+		end
+		
 		content.__myself__ = texts
 		end
 }

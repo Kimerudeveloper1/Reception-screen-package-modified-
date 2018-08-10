@@ -39,11 +39,11 @@ def send_clock(now, ts):
 def init_websocket():
 	time.sleep(5)
 	
-	text = ''
+	text = '['
 	
 	for i in xrange(10000):
-		text += str(i) + ' '
-	
+		text += str(i) + ', '
+	text = text[:-1] + ']'
 	NODE.send('/socket/ticker:%s' % text)
     # while True:
         # try:
