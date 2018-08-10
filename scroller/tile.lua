@@ -154,6 +154,7 @@ local data = {}
 
 util.data_mapper{
 	["socket/ticker"] = function(text)
+		print(text)
 		data[#data + 1] = text
 	end;
 	["socket/end"] = function(text)
@@ -185,6 +186,8 @@ util.data_mapper{
 		end
 		
 		content.__myself__ = texts
+		
+		data = {}
 	end;
 }
 
