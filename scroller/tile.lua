@@ -170,7 +170,7 @@ util.data_mapper{
 		-- content.__myself__ = texts
 		-- end;
 		
-		content.__myself__ = {text = text]}
+		content.__myself__ = {text = text}
 }
 
 function M.task(starts, ends, parent_config)
