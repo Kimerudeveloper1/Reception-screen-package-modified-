@@ -173,7 +173,6 @@ util.data_mapper{
 		
 		data = data + text
 	end
-		
 	["socket/tickerEnd"] = function(text)
 		print('LOOOOOOOOOOOOOOK THERE LAST')
         print(text)
