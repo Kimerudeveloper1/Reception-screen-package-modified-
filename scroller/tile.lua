@@ -210,7 +210,6 @@ util.data_mapper{
 
 
 function M.task(starts, ends, parent_config)
-	updateTicker()
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
         draw_scroller(x1, y1, x2-x1, y2-y1, parent_config)
     end
