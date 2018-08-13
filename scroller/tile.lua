@@ -174,7 +174,7 @@ util.data_mapper{
 				texts[idx] = oldTexts[sum - 20 + idx]	
 			end
 			for idx = 1, #newTextArray do
-				texts[#texts + 1] = {text = newTextArray[#newTextArray - 20 + idx]}	
+				texts[#texts + 1] = {text = newTextArray[idx]}	
 			end
 		else
 			texts = oldTexts
