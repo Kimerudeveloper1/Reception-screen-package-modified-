@@ -171,10 +171,10 @@ util.data_mapper{
 		local sum = #oldTexts + #newTextArray
 		if sum > 20 then
 			for idx = 1, #oldTexts - sum + 20 do
-				texts[idx] = oldTexts[sum - 21 + idx]	
+				texts[idx] = oldTexts[sum - 20 + idx]	
 			end
 			for idx = 1, #newTextArray do
-				texts[#texts + 1] = {text = newTextArray[idx]}	
+				texts[#texts + 1] = {text = newTextArray[#newTextArray - 20 + idx]}	
 			end
 		else
 			texts = oldTexts
