@@ -7,6 +7,10 @@
     "time_fmt": "%a %H:%M",
 	"tick_height": 45,
 	"rotation": 0,
-	"sources": [{"sourceid": "DEFAULT"}],
+	"sources": [
+		{
+            "sourceid": "DEFAULT"
+        }
+	]
 	"playerUid": ""
 }
