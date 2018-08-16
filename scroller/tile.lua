@@ -163,7 +163,7 @@ util.data_mapper{
 		local s = concatter(data)
 		
 		local newTextArray = json.decode(s)
-		print(#newTextArray)	
+		print(#newTextArray)
 		
 		local oldTexts = content.__myself__
 		local texts = {}
