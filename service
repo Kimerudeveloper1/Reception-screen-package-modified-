@@ -36,25 +36,25 @@ def send_clock(now, ts):
     NODE.send('/clock/since_monday:%f' % since_monday)
     NODE.send('/clock/human:%s' % now.strftime(CONFIG['time_fmt']))
     
-	
+    
 def send_to_lua(text):
-	bufSize = 1000
-	length = len(text)
-	chunksNumber = length // bufSize
-	lastChunkSize = length % bufSize
-	
-	for i in xrange(chunksNumber):
-		NODE.send('/socket/ticker:%s' % text[i*bufSize:(i+1)*bufSize])
-	NODE.send('/socket/end:%s' % text[chunksNumber*bufSize:chunksNumber*bufSize + lastChunkSize])
-	
+    bufSize = 1000
+    length = len(text)
+    chunksNumber = length // bufSize
+    lastChunkSize = length % bufSize
+    
+    for i in xrange(chunksNumber):
+        NODE.send('/socket/ticker:%s' % text[i*bufSize:(i+1)*bufSize])
+    NODE.send('/socket/end:%s' % text[chunksNumber*bufSize:chunksNumber*bufSize + lastChunkSize])
+    
 def init_websocket():
     while True:
         try:
             # url = "ws://http://kimeru-tick.inside.cactussoft.biz/ws/" + CONFIG['playeruid'] + "?"
-			url = "ws://192.168.8.11:805/ws/" + CONFIG['playeruid'] + "?"
+            url = "ws://192.168.8.11:805/ws/" + CONFIG['playeruid'] + "?"
             for source in CONFIG["sources"]:
                 url += "sources=" + source["sourceid"] + "&"
-
+    
             ws = create_connection(url[:-1])
             try:
                 while True:
