@@ -50,7 +50,8 @@ def send_to_lua(text):
 def init_websocket():
     while True:
         try:
-            url = "ws://kimeru-tick.inside.cactussoft.biz/ws/" + CONFIG['playeruid'] + "?"
+            # url = "ws://http://kimeru-tick.inside.cactussoft.biz/ws/" + CONFIG['playeruid'] + "?"
+			url = "ws://192.168.8.11:805/ws/" + CONFIG['playeruid'] + "?"
             for source in CONFIG["sources"]:
                 url += "sources=" + source["sourceid"] + "&"
 

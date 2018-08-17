@@ -160,12 +160,15 @@ util.data_mapper{
 	["socket/end"] = function(text)
 		data[#data + 1] = text
 		
-		local s = concatter(data)
+		local allDataString = concatter(data)
+		local recievedDataOject = json.decode(allDataString)
+		local newTextArray = recievedDataOject.TickerText
+		local oldTexts = {}
+		if recievedDataOject.IsResetText == false then
+			oldTexts = content.__myself__
+		end
 		
-		local newTextArray = json.decode(s)
 		print(#newTextArray)
-		
-		local oldTexts = content.__myself__
 		local texts = {}
 		
 		local sum = #oldTexts + #newTextArray
