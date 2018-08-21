@@ -173,18 +173,37 @@ util.data_mapper{
 		
 		local sum = #oldTexts + #newTextArray
 		if sum > 20 then
-			for idx = 1, #oldTexts - sum + 20 do
-				texts[idx] = oldTexts[sum - 20 + idx]	
-			end
+			texts = oldTexts
+			for idx = 1, 20 - #newTextArray do
+				texts[idx + #newTextArray] = oldTexts[idx]
+			end 
 			for idx = 1, #newTextArray do
-				texts[#texts + 1] = {text = newTextArray[idx]}	
+				texts[idx] = {text = newTextArray[idx]}	
 			end
 		else
 			texts = oldTexts
+			for idx = 1, sum - #newTextArray do
+				texts[idx + #newTextArray] = oldTexts[idx]
+			end 
 			for idx = 1, #newTextArray do
-				texts[#texts + 1] = {text = newTextArray[idx]}	
+				texts[idx] = {text = newTextArray[idx]}	
 			end
 		end
+		
+		-- local sum = #oldTexts + #newTextArray
+		-- if sum > 20 then
+			-- for idx = 1, #oldTexts - sum + 20 do
+				-- texts[idx] = oldTexts[sum - 20 + idx]	
+			-- end
+			-- for idx = 1, #newTextArray do
+				-- texts[#texts + 1] = {text = newTextArray[idx]}	
+			-- end
+		-- else
+			-- texts = oldTexts
+			-- for idx = 1, #newTextArray do
+				-- texts[#texts + 1] = {text = newTextArray[idx]}	
+			-- end
+		-- end
 		
 		print("UPDATED TICKER TEXT !!!!!!!!!!!!!!!")
 		for idx = 1, #texts do
@@ -192,7 +211,6 @@ util.data_mapper{
 		end
 		
 		content.__myself__ = texts
-		items = {}
 		
 		data = {}
 	end;
