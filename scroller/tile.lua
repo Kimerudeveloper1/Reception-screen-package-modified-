@@ -40,7 +40,6 @@ api.add_listener("scroller", function(tile, value)
 end)
 
 local items = {}
-local hasNewContent = false
 local current_left = 0
 local last = sys.now()
 
@@ -76,13 +75,7 @@ local function draw_scroller(x, y, w, h, parent_config)
         end
     end
 
-    while x < WIDTH do
-		print(hasNewContent)
-		if hasNewContent and idx >= #items then
-			hasNewContent = false
-			break
-		end
-	
+    while x < WIDTH do	
         if idx > #items then
             local ok, item = pcall(feed)
             if ok and item then
@@ -199,7 +192,7 @@ util.data_mapper{
 		end
 		
 		content.__myself__ = texts
-		hasNewContent = true
+		items = {}
 		
 		data = {}
 	end;
