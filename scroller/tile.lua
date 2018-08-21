@@ -211,6 +211,7 @@ util.data_mapper{
 		end
 		
 		content.__myself__ = texts
+		items = {}
 		
 		data = {}
 	end;
