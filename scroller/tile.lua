@@ -76,6 +76,11 @@ local function draw_scroller(x, y, w, h, parent_config)
     end
 
     while x < WIDTH do
+		if hasNewContent then
+			idx = #items + 1
+			hasNewContent = false
+		end
+	
         if idx > #items then
             local ok, item = pcall(feed)
             if ok and item then
@@ -151,6 +156,7 @@ local concatter = function(s)
 end
 
 local data = {}
+local hasNewContent = false
 
 util.data_mapper{
 	["socket/ticker"] = function(text)
@@ -192,6 +198,7 @@ util.data_mapper{
 		end
 		
 		content.__myself__ = texts
+		hasNewContent = true
 		
 		data = {}
 	end;
