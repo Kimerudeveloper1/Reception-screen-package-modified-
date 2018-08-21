@@ -28,6 +28,9 @@ local function mix_content()
         end
         offset = offset + 1
     end
+	for idx = 1, #out do
+		print(out[idx].text)
+	end
     return out
 end
 
@@ -76,11 +79,7 @@ local function draw_scroller(x, y, w, h, parent_config)
         end
     end
 
-    while x < WIDTH do			
-		print(#items)
-		for idx = 1, #items do
-			print(items[idx].text)
-		end 
+    while x < WIDTH do
         if idx > #items then
             local ok, item = pcall(feed)
             if ok and item then
