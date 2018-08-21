@@ -82,7 +82,7 @@ local function draw_scroller(x, y, w, h, parent_config)
 
     while x < WIDTH do	
 		if isUpdated then
-			break;
+			break
 		end
 		
         if idx > #items then
