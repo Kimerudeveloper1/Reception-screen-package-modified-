@@ -78,8 +78,10 @@ local function draw_scroller(x, y, w, h, parent_config)
 
     while x < WIDTH do			
 		print(#items)
-		
-        if idx > #items or isUpdated then
+		for s in #items do
+			print(s)
+		end
+        if idx > #items then
             local ok, item = pcall(feed)
             if ok and item then
                 items[#items+1] = {
@@ -92,7 +94,6 @@ local function draw_scroller(x, y, w, h, parent_config)
                     text = "                      ",
                 }
             end
-			isUpdated = false
         end
 
         local item = items[idx]
