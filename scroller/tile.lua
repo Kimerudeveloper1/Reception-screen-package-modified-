@@ -46,10 +46,6 @@ local last = sys.now()
 
 local function draw_scroller(x, y, w, h, parent_config)
     -- scissors.set(x, y, x+w, y+h)
-	if isUpdated then
-		items = {}
-		isUpdated = false
-	end
 	
 	if parent_config.rotation == 90 or parent_config.rotation == 270 then
         y = NATIVE_WIDTH - h
@@ -80,14 +76,10 @@ local function draw_scroller(x, y, w, h, parent_config)
         end
     end
 
-    while x < WIDTH do	
-		if isUpdated then
-			break
-		end
-		
+    while x < WIDTH do			
 		print(#items)
 		
-        if idx > #items then
+        if idx > #items or isUpdated then
             local ok, item = pcall(feed)
             if ok and item then
                 items[#items+1] = {
@@ -100,6 +92,7 @@ local function draw_scroller(x, y, w, h, parent_config)
                     text = "                      ",
                 }
             end
+			isUpdated = false
         end
 
         local item = items[idx]
