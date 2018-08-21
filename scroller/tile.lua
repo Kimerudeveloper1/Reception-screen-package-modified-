@@ -82,9 +82,6 @@ local function draw_scroller(x, y, w, h, parent_config)
 			hasNewContent = false
 			break
 		end
-		if hasNewContent then
-			break
-		end
 	
         if idx > #items then
             local ok, item = pcall(feed)
