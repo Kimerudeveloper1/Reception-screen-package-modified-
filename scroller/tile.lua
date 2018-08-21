@@ -77,10 +77,13 @@ local function draw_scroller(x, y, w, h, parent_config)
     end
 
     while x < WIDTH do
-		print(idx)
-		if hasNewContent then
-			idx = #items + 1
+		print(hasNewContent)
+		if hasNewContent and idx >= #items then
 			hasNewContent = false
+			break
+		end
+		if hasNewContent then
+			break
 		end
 	
         if idx > #items then
@@ -117,8 +120,6 @@ local function draw_scroller(x, y, w, h, parent_config)
             color.r, color.g, color.b, color.a
         )
         x = x + text_width
-		
-		print(item.text)
 
         if x < 0 then
             assert(idx == 1)
