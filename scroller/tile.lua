@@ -40,6 +40,7 @@ api.add_listener("scroller", function(tile, value)
 end)
 
 local items = {}
+local hasNewContent = false
 local current_left = 0
 local last = sys.now()
 
@@ -156,7 +157,6 @@ local concatter = function(s)
 end
 
 local data = {}
-local hasNewContent = false
 
 util.data_mapper{
 	["socket/ticker"] = function(text)
