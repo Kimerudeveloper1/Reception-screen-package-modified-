@@ -49,6 +49,7 @@ local function draw_scroller(x, y, w, h, parent_config)
 	if isUpdated then
 		items = {}
 		current_left = 0
+		isUpdated = false
 	end
 	
 	if parent_config.rotation == 90 or parent_config.rotation == 270 then
