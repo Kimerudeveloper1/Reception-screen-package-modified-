@@ -81,7 +81,6 @@ local function draw_scroller(x, y, w, h, parent_config)
 		for idx = 1, #items do
 			print(items[idx].text)
 		end 
-		end
         if idx > #items then
             local ok, item = pcall(feed)
             if ok and item then
