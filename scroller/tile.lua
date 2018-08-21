@@ -78,7 +78,7 @@ local function draw_scroller(x, y, w, h, parent_config)
 
     while x < WIDTH do			
 		print(#items)
-		for s in #items do
+		for s in items do
 			print(s)
 		end
         if idx > #items then
