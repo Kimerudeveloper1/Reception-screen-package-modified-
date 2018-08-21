@@ -36,31 +36,33 @@ end
 
 local isReset = false
 local function generator(refiller)
-    local items = {}
+    local items1 = {}
     return {
         next = function(self)
 			if isReset then
-				items = {}
+				items1 = {}
 				isReset = false
 			end
-            local next_item = next(items)
+            local next_item = next(items1)
             if not next_item then
                 for _, value in ipairs(refiller()) do
-                    items[value] = 1
+                    items1[value] = 1
                 end
-                next_item = next(items)
+                next_item = next(items1)
                 if not next_item then
                     error("no items available")
                 end
             end
-            items[next_item] = nil
+            items1[next_item] = nil
+			
+			print(next_item.text)
             return next_item
         end;
         add = function(self, value)
-            items[value] = 1
+            items1[value] = 1
         end;
         remove = function(self, value)
-            items[value] = nil
+            items1[value] = nil
         end;
     }
 end
