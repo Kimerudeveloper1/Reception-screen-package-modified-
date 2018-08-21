@@ -77,6 +77,7 @@ local function draw_scroller(x, y, w, h, parent_config)
     end
 
     while x < WIDTH do
+		print(hasNewContent)
 		if hasNewContent then
 			idx = #items + 1
 			hasNewContent = false
