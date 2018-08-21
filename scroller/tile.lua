@@ -36,15 +36,9 @@ local function generator(refiller)
     local items1 = {}
     return {
         next = function()
-			if isReset then
-				items1 = {}
-				isReset = false
-			end
             local next_item = next(items1)
             if not next_item then
-                for _, value in ipairs(refiller()) do
-                    items1[value] = 1
-                end
+                items1 = refiller()
                 next_item = next(items1)
                 if not next_item then
                     error("no items available")
