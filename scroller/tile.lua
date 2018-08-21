@@ -28,9 +28,6 @@ local function mix_content()
         end
         offset = offset + 1
     end
-	for idx = 1, #out do
-		print(out[idx].text)
-	end
     return out
 end
 
@@ -38,7 +35,7 @@ local isReset = false
 local function generator(refiller)
     local items1 = {}
     return {
-        next = function(self)
+        next = function()
 			if isReset then
 				items1 = {}
 				isReset = false
@@ -57,12 +54,6 @@ local function generator(refiller)
 			
 			print(next_item.text)
             return next_item
-        end;
-        add = function(self, value)
-            items1[value] = 1
-        end;
-        remove = function(self, value)
-            items1[value] = nil
         end;
     }
 end
