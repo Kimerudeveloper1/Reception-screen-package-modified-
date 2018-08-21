@@ -48,7 +48,6 @@ local function draw_scroller(x, y, w, h, parent_config)
     -- scissors.set(x, y, x+w, y+h)
 	if isUpdated then
 		items = {}
-		current_left = 0
 		isUpdated = false
 	end
 	
@@ -85,6 +84,8 @@ local function draw_scroller(x, y, w, h, parent_config)
 		if isUpdated then
 			break
 		end
+		
+		print(#items)
 		
         if idx > #items then
             local ok, item = pcall(feed)
