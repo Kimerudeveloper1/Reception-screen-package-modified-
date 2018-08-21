@@ -34,7 +34,38 @@ local function mix_content()
     return out
 end
 
-local feed = util.generator(mix_content).next
+local isReset = false
+local function generator(refiller)
+    local items = {}
+    return {
+        next = function(self)
+			if isReset then
+				items = {}
+				isReset = false
+			end
+            local next_item = next(items)
+            if not next_item then
+                for _, value in ipairs(refiller()) do
+                    items[value] = 1
+                end
+                next_item = next(items)
+                if not next_item then
+                    error("no items available")
+                end
+            end
+            items[next_item] = nil
+            return next_item
+        end;
+        add = function(self, value)
+            items[value] = 1
+        end;
+        remove = function(self, value)
+            items[value] = nil
+        end;
+    }
+end
+
+local feed = generator(mix_content).next
 
 api.add_listener("scroller", function(tile, value)
     print("got new scroller content from " .. tile)
@@ -43,7 +74,6 @@ api.add_listener("scroller", function(tile, value)
 end)
 
 local items = {}
-local isUpdated = false
 local current_left = 0
 local last = sys.now()
 
@@ -215,7 +245,7 @@ util.data_mapper{
 		end
 		
 		content.__myself__ = texts
-		isUpdated = true
+		isReset = true
 		
 		data = {}
 	end;
