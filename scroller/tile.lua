@@ -42,6 +42,8 @@ local function generator(refiller)
             if not next_item or isReset then
 				print("RESET GENERATOR")
                 for _, value in ipairs(refiller()) do
+					print("GENERATOR")
+					print(value.text)
                     items[value] = 1
                 end
                 next_item = next(items)
