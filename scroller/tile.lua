@@ -36,17 +36,18 @@ end
 local isReset = false
 local function generator(refiller)
     local index = 1
+	
     return {
         next = function(self)
-			if #content < 1 then
+			if #content.__myself__ < 1 then
 				return nil
 			else
-				if index > #content then
+				if index > #content.__myself__ then
 					index = 1
 				end
 				
 				index = index + 1
-				return content[index - 1]
+				return content.__myself__[index - 1]
 			end
         end;
     }
