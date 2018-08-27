@@ -42,8 +42,9 @@ local function generator(refiller)
 			if #content.__myself__ < 1 then
 				return nil
 			else
-				if index > #content.__myself__ then
+				if index > #content.__myself__ or isReset then
 					index = 1
+					isReset = false
 				end
 				
 				index = index + 1
