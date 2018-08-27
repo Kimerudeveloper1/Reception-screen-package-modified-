@@ -38,18 +38,19 @@ local function generator(refiller)
         next = function(self)
             local next_item = next(items)
             if not next_item or isReset then
+				print("RESET GENERATOR")
                 for _, value in ipairs(refiller()) do
                     items[value] = 1
                 end
                 next_item = next(items)
 				isReset = false
-				print("GENERATOR")
-				print(next_item.text)
                 if not next_item then
                     error("no items available")
                 end
             end
             items[next_item] = nil
+			print("GENERATOR")
+			print(next_item.text)
             return next_item
         end;
         add = function(self, value)
