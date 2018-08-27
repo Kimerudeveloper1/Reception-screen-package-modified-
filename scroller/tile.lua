@@ -35,34 +35,19 @@ end
 
 local isReset = false
 local function generator(refiller)
-    local items = {}
+    local index = 1
     return {
         next = function(self)
-            local next_item = next(items)
-            if not next_item or isReset then
-				print("RESET GENERATOR")
-				items = {}
-                for _, value in ipairs(refiller()) do
-					print("GENERATOR HAVE")
-					print(value.text)
-                    items[value] = 1
-                end
-                next_item = next(items)
-				isReset = false
-                if not next_item then
-                    error("no items available")
-                end
-            end
-            items[next_item] = nil
-			print("GENERATOR")
-			print(next_item.text)
-            return next_item
-        end;
-        add = function(self, value)
-            items[value] = 1
-        end;
-        remove = function(self, value)
-            items[value] = nil
+			if #content < 1 then
+				return nil
+			else
+				if index > #content then
+					index = 1
+				end
+				
+				index = index + 1
+				return content[index - 1]
+			end
         end;
     }
 end
