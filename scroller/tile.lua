@@ -20,6 +20,8 @@ local function mix_content()
         for tile, items in pairs(content) do
             if items[offset] then
                 out[#out+1] = items[offset]
+				print("MIX CONTENT")
+				print(items[offset].text)
                 added = true
             end
         end
