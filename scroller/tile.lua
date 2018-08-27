@@ -12,29 +12,8 @@ local M = {}
 -- { source: { text1, text2, text3, ...} }
 local content = {__myself__ = {}}
 
-local function mix_content()
-    local out = {}
-    local offset = 1
-    while true do
-        local added = false
-        for tile, items in pairs(content) do
-            if items[offset] then
-                out[#out+1] = items[offset]
-				print("MIX CONTENT")
-				print(items[offset].text)
-                added = true
-            end
-        end
-        if not added then
-            break
-        end
-        offset = offset + 1
-    end
-    return out
-end
-
 local isReset = false
-local function generator(refiller)
+local function generator()
     local index = 1
 	
     return {
@@ -54,7 +33,7 @@ local function generator(refiller)
     }
 end
 
-local feed = generator(mix_content).next
+local feed = generator().next
 
 api.add_listener("scroller", function(tile, value)
     print("got new scroller content from " .. tile)
