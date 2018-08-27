@@ -37,7 +37,7 @@ local function generator(refiller)
     return {
         next = function()
             local next_item = next(items1)
-            if not next_item then
+            if not next_item or isReset then
                 items1 = refiller()
                 next_item = next(items1)
                 if not next_item then
