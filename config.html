@@ -222,7 +222,7 @@
           <div class='col-xs-12'>
             <button
               class='btn btn-default'
-              @click="onAdd(-1)">
+              @click="onSourceAdd(-1)">
               Add
               <span class='glyphicon glyphicon-plus'></span>
             </button>
@@ -236,7 +236,7 @@
                 :source="source"
                 :index="index">
               </source-ui>
-              <button class='btn btn-default' @click="onAdd(index)">
+              <button class='btn btn-default' @click="onSourceAdd(-1)">
                 Add
                 <span class='glyphicon glyphicon-plus'></span>
               </button>
