@@ -214,9 +214,65 @@
             </div>
           </div>
         </div>
+		
+		<hr/>
+		
+		<h4>Sources</h4>
+        <div class='row'>
+          <div class='col-xs-12'>
+            <button
+              class='btn btn-default'
+              @click="onAdd(-1)">
+              Add
+              <span class='glyphicon glyphicon-plus'></span>
+            </button>
+            <br/>
+            <br/>
+            <div v-if="sources.length == 0" class="alert alert-info">
+              No sources configured. Will use DEFAULT source. Click <em>Add</em> to add source.
+            </div>
+            <div v-for="(source, index) in sources">
+              <source-ui
+                :source="source"
+                :index="index">
+              </source-ui>
+              <button class='btn btn-default' @click="onAdd(index)">
+                Add
+                <span class='glyphicon glyphicon-plus'></span>
+              </button>
+              <br/>
+              <br/>
+            </div>
+          </div>
+        </div>
+		
       </div>
     </script>
 
+	<script type="text/x-template" id="source-ui">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <button class='btn btn-danger pull-right' @click="onRemove">
+            Delete
+            <span class='glyphicon glyphicon-trash'></span>
+          </button>
+        </div>
+        <div class="panel-body">
+			<textarea
+				placeholder="Source Id"
+				class="form-control sourceid"
+				:style="{
+				  'background-color': page.config.background || '#000000',
+				  'color': page.config.foreground || '#ffffff',
+				}"
+				@change="onUpdateText"
+				@keyup="onUpdateText"
+				@paste="onUpdateText">{{source.sourceid}}
+			</textarea>
+        </div>
+      </div>
+    </script>
+	
     <script type="text/x-template" id="page-ui">
       <div class="panel panel-default">
         <div class="panel-heading">

@@ -7,6 +7,7 @@ const store = new Vuex.Store({
     node_assets: {},
     config: {
       pages: [],
+	  sources: []
     },
   },
   mutations: {
@@ -57,6 +58,12 @@ const store = new Vuex.Store({
     set_config(state, {index, key, value}) {
       Vue.set(state.config.pages[index].config, key, value);
     },
+	set_sourceid(state, {index, key, value}) {
+      Vue.set(state.config.sources[index].config, key, value);
+    },
+	remove_source (state, index) {
+      state.config.sources.splice(index, 1);
+    },
   },
 
   actions: {
@@ -86,6 +93,12 @@ const store = new Vuex.Store({
     },
     set_config(context, update) {
       context.commit('set_config', update);
+    },
+	set_sourceid(context, update) {
+      context.commit('set_sourceid', update);
+    },
+	remove_source (context, index) {
+      context.commit('remove_source', index);
     },
   }
 })
@@ -123,6 +136,9 @@ Vue.component('config-ui', {
     pages() {
       return this.config.pages;
     },
+	sources() {
+      return this.config.sources;
+    },
   },
   methods: {
     onAdd(index) {
@@ -130,6 +146,19 @@ Vue.component('config-ui', {
     },
     onSetConfig(key, value) {
       this.$store.dispatch('set_option', {key: key, value: value});
+    },
+  }
+})
+
+Vue.component('source-ui', {
+  template: '#source-ui',
+  props: ["source", "index"],
+  methods: {
+    onRemove() {
+      this.$store.dispatch('remove_source', this.index);
+    },
+	onUpdateText(evt) {
+      this.$emit('set_sourceid', 'sourceid', evt.target.value);
     },
   }
 })
