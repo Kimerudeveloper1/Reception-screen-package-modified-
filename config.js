@@ -59,7 +59,7 @@ const store = new Vuex.Store({
       Vue.set(state.config.pages[index].config, key, value);
     },
 	set_sourceid(state, {index, key, value}) {
-      Vue.set(state.config.sources[index].config, key, value);
+      Vue.set(state.config.sources[index], key, value);
     },
 	remove_source (state, index) {
       state.config.sources.splice(index, 1);
