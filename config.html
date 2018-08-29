@@ -258,13 +258,11 @@
           </button>
         </div>
         <div class="panel-body">
-			<textarea
-				placeholder="Source Id"
-				class="form-control sourceid"
-				@change="onUpdateText"
-				@keyup="onUpdateText"
-				@paste="onUpdateText">{{source.sourceid}}
-			</textarea>
+			<input
+                class="form-control"
+                type="text"
+                :value="source.sourceid"
+                @change="onUpdateText">
         </div>
       </div>
     </script>
