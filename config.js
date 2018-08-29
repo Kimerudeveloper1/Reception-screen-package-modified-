@@ -64,6 +64,17 @@ const store = new Vuex.Store({
 	remove_source (state, index) {
       state.config.sources.splice(index, 1);
     },
+	create_source (state, index) {
+      var new_source = {
+        sourceid: "DEFAULT"
+      }
+      if (index != -1) {
+        var last_page = state.config.sources[index];
+        state.config.sources.splice(index+1, 0, new_source);
+      } else {
+        state.config.sources.splice(0, 0, new_source);
+      }
+    },
   },
 
   actions: {
@@ -99,6 +110,9 @@ const store = new Vuex.Store({
     },
 	remove_source (context, index) {
       context.commit('remove_source', index);
+    },
+	create_source (context, index) {
+      context.commit('create_source', index);
     },
   }
 })
@@ -146,6 +160,9 @@ Vue.component('config-ui', {
     },
     onSetConfig(key, value) {
       this.$store.dispatch('set_option', {key: key, value: value});
+    },
+	onSourceAdd(index) {
+      this.$store.dispatch('create_source', index);
     },
   }
 })
