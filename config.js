@@ -65,6 +65,9 @@ const store = new Vuex.Store({
       state.config.sources.splice(index, 1);
     },
 	create_source (state, index) {
+		/* only one source for now */
+	  if (state.config.sources.length == 1)
+		  return;
       var new_source = {
         sourceid: "DEFAULT"
       }
