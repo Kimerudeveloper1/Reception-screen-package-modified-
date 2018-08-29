@@ -261,10 +261,6 @@
 			<textarea
 				placeholder="Source Id"
 				class="form-control sourceid"
-				:style="{
-				  'background-color': page.config.background || '#000000',
-				  'color': page.config.foreground || '#ffffff',
-				}"
 				@change="onUpdateText"
 				@keyup="onUpdateText"
 				@paste="onUpdateText">{{source.sourceid}}
