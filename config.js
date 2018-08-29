@@ -175,6 +175,7 @@ Vue.component('source-ui', {
       this.$store.dispatch('remove_source', this.index);
     },
 	onUpdateText(value) {
+		alert(value)
 	  this.$store.dispatch('set_sourceid', {
         index: this.index,
         sourceid: value
