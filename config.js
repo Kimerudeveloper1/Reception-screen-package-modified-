@@ -178,7 +178,7 @@ Vue.component('source-ui', {
 		console.log(value)
 	  this.$store.dispatch('set_sourceid', {
         index: this.index,
-        sourceid: value
+        sourceid: value.target.value
       });
     },
   }
