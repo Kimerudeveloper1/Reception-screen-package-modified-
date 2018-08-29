@@ -58,8 +58,8 @@ const store = new Vuex.Store({
     set_config(state, {index, key, value}) {
       Vue.set(state.config.pages[index].config, key, value);
     },
-	set_sourceid(state, {index, key, value}) {
-      Vue.set(state.config.sources[index], key, value);
+	set_sourceid(state, {index, sourceid}) {
+      state.config.sources[index].sourceid = sourceid;
     },
 	remove_source (state, index) {
       state.config.sources.splice(index, 1);
@@ -174,8 +174,11 @@ Vue.component('source-ui', {
     onRemove() {
       this.$store.dispatch('remove_source', this.index);
     },
-	onUpdateText(evt) {
-      this.$emit('set_sourceid', 'sourceid', evt.target.value);
+	onUpdateText(value) {
+	  this.$store.dispatch('set_sourceid', {
+        index: this.index,
+        sourceid: value
+      });
     },
   }
 })
