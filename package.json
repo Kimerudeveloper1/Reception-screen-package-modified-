@@ -1,8 +1,8 @@
 {
     "name": "Reception Screen (modified)",
-    "author": "Florian Wesch <fw@info-beamer.com>",
+    "author": "Florian Wesch. Modified by Cactus",
     "desc": "Shows textual/image and video information for a reception-style information screen.",
-    "repository": "https://github.com/tioma18/tick",
+    "repository": "https://github.com/Kimerudeveloper1/Reception-screen-package-modified-",
     "version": "0.3",
 	"runtime": {
 		"antialias": true
