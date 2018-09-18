@@ -1032,9 +1032,9 @@ util.file_watch("config.json", function(raw)
 	screen_setup = rotate(node_config.rotation)
 end)    
 
-node.set_flag("slow_gc", false)
+node.set_flag("slow_gc", true)
 function node.render()
-node.set_flag("slow_gc", false)
+node.set_flag("slow_gc", true)
     -- gl.clear(0, 0, 0, 1)
 	screen_setup()
 	
