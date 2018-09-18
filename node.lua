@@ -2,7 +2,7 @@ gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 
 node.alias "*" -- catch all communication
 
-node.set_flag "slow_gc"
+node.set_flag("slow_gc", true)
 
 util.noglobals()
 
