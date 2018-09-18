@@ -705,7 +705,6 @@ local function JobQueue()
     }
 end
 
-local playlist_Global
 local function Scheduler(playlist_source, job_queue)
     local global_synced = false
     local scheduled_until = clock.unix()
@@ -719,14 +718,8 @@ local function Scheduler(playlist_source, job_queue)
         if now < next_schedule then
             return
         end
-
-		print(playlist_Global)
 		
-		print("SCHEDULE START")
-		if not playlist_Global then
-			print("UPDATE PLAYLIST")
-			playlist_Global = playlist_source()
-		end
+		local playlist = playlist_source()
 
         -- get total playlist duration
         local total_duration = 0
@@ -1033,7 +1026,6 @@ util.file_watch("config.json", function(raw)
 	print("UPDATE")
     node_config = json.decode(raw)
 	
-	playlist_Global = false
 	node_config.rotation = tonumber(node_config.rotation)
 	node_config.portrait = node_config.rotation == 90 or node_config.rotation == 270
 	
