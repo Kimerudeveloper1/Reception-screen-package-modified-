@@ -105,20 +105,8 @@
             "default": {}
         }]
     }, {
-        "title": "RSS sources Ids",
-        "name": "sources",
-        "type": "list",
-        "itemname": "SourceId",
-        "items": [{
-            "title": "RSS source Id",
-            "ui_width": 12,
-            "name": "sourceid",
-            "type": "string",
-            "default": "DEFAULT"
-        }]
-    }, {
         "title": "PlayerUid",
-        "ui_width": 4,
+        "ui_width": 8,
         "name": "playeruid",
         "type": "string",
         "default": ""

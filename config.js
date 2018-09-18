@@ -120,6 +120,14 @@ Vue.component('config-ui', {
         this.$store.dispatch('set_option', {key: 'rotation', value: value});
       },
     },
+	playeruid: {
+      get() {
+        return this.config.playeruid;
+      },
+      set(value) {
+        this.$store.dispatch('set_option', {key: 'playeruid', value: value});
+      },
+    },
     pages() {
       return this.config.pages;
     },
