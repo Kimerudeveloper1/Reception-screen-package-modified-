@@ -723,8 +723,8 @@ local function Scheduler(playlist_source, job_queue)
 
         -- get total playlist duration
         local total_duration = 0
-        for idx = 1, #playlist_Global do
-            local item = playlist_Global[idx]
+        for idx = 1, #playlist do
+            local item = playlist[idx]
             total_duration = max(total_duration, item.offset + item.duration)
         end
 
@@ -749,8 +749,8 @@ local function Scheduler(playlist_source, job_queue)
 
         print("base unix time is", base)
             
-        for idx = 1, #playlist_Global do
-            local item = playlist_Global[idx]
+        for idx = 1, #playlist do
+            local item = playlist[idx]
             local starts = base + item.offset
             if starts >= scheduled_until - TOLERANCE then
                 enqueue(starts, item)
