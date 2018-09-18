@@ -2,6 +2,8 @@ gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 
 node.alias "*" -- catch all communication
 
+node.set_flag "slow_gc"
+
 util.noglobals()
 
 local json = require "json"
