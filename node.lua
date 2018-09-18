@@ -2,8 +2,6 @@ gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 
 node.alias "*" -- catch all communication
 
-node.set_flag("slow_gc", false)
-
 util.noglobals()
 
 local json = require "json"
@@ -1034,7 +1032,9 @@ util.file_watch("config.json", function(raw)
 	screen_setup = rotate(node_config.rotation)
 end)    
 
+node.set_flag("slow_gc", false)
 function node.render()
+node.set_flag("slow_gc", false)
     -- gl.clear(0, 0, 0, 1)
 	screen_setup()
 	
