@@ -7,7 +7,6 @@ const store = new Vuex.Store({
     node_assets: {},
     config: {
       pages: [],
-	  sources: []
     },
   },
   mutations: {
@@ -58,26 +57,6 @@ const store = new Vuex.Store({
     set_config(state, {index, key, value}) {
       Vue.set(state.config.pages[index].config, key, value);
     },
-	set_sourceid(state, {index, sourceid}) {
-      state.config.sources[index].sourceid = sourceid;
-    },
-	remove_source (state, index) {
-      state.config.sources.splice(index, 1);
-    },
-	create_source (state, index) {
-		/* only one source for now */
-	  if (state.config.sources.length == 1)
-		  return;
-      var new_source = {
-        sourceid: "DEFAULT"
-      }
-      if (index != -1) {
-        var last_page = state.config.sources[index];
-        state.config.sources.splice(index+1, 0, new_source);
-      } else {
-        state.config.sources.splice(0, 0, new_source);
-      }
-    },
   },
 
   actions: {
@@ -107,15 +86,6 @@ const store = new Vuex.Store({
     },
     set_config(context, update) {
       context.commit('set_config', update);
-    },
-	set_sourceid(context, update) {
-      context.commit('set_sourceid', update);
-    },
-	remove_source (context, index) {
-      context.commit('remove_source', index);
-    },
-	create_source (context, index) {
-      context.commit('create_source', index);
     },
   }
 })
@@ -153,9 +123,6 @@ Vue.component('config-ui', {
     pages() {
       return this.config.pages;
     },
-	sources() {
-      return this.config.sources;
-    },
   },
   methods: {
     onAdd(index) {
@@ -163,26 +130,6 @@ Vue.component('config-ui', {
     },
     onSetConfig(key, value) {
       this.$store.dispatch('set_option', {key: key, value: value});
-    },
-	onSourceAdd(index) {
-      this.$store.dispatch('create_source', index);
-    },
-  }
-})
-
-Vue.component('source-ui', {
-  template: '#source-ui',
-  props: ["source", "index"],
-  methods: {
-    onRemove() {
-      this.$store.dispatch('remove_source', this.index);
-    },
-	onUpdateText(value) {
-		console.log(value)
-	  this.$store.dispatch('set_sourceid', {
-        index: this.index,
-        sourceid: value.target.value
-      });
     },
   }
 })
