@@ -304,11 +304,12 @@ local function Image(config)
 	--   transparent: true/false
 
     local file = resource.open_file(config.asset_name)
-	local img = resource.load_image(file)
 	
     return function(starts, ends)
         wait_t(starts - 2)
 
+		local img = resource.load_image(file)
+		
         local fade_time = config.fade_time or 0.5
 
         if config.kenburns then
@@ -386,7 +387,7 @@ local function Image(config)
             end
         end
 		
-        --img:dispose()
+        img:dispose()
     end
 end
 
@@ -402,9 +403,11 @@ local function Video(config)
     --   raw: use raw video?
     --   layer: video layer for raw videos
 
+	local file = resource.open_file(config.asset_name)
+	
     return function(starts, ends)
         wait_t(starts - 1)
-		local file = resource.open_file(config.asset_name)
+		
         local fade_time = config.fade_time or 0.5
 
         local vid
