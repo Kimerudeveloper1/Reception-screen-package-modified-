@@ -11,6 +11,7 @@ local M = {}
 
 -- { source: { text1, text2, text3, ...} }
 local content = {__myself__ = {}}
+local tempContent = {__myself__ = {}}
 
 local isReset = false
 local function generator()
@@ -18,9 +19,22 @@ local function generator()
 	
     return {
         next = function(self)
-			if #content.__myself__ < 1 then
+			if #content.__myself__ < 1 and #tempContent.__myself__ < 1 then
 				return nil
-			else
+			else				
+				-- temp ticker
+				if not tempTickerFinish == 0 then 
+					if index > #tempContent.__myself__ or isReset then
+						index = 1
+						isReset = false
+					end
+				
+					index = index + 1
+					return tempContent.__myself__[index - 1]
+				end
+				
+								
+				-- origin ticker
 				if index > #content.__myself__ or isReset then
 					index = 1
 					isReset = false
@@ -144,7 +158,7 @@ function M.updated_config_json(config)
 end
 
 
-local concatter = function(s)
+local function concat(s)
 	local t = { }
 	for k,v in ipairs(s) do
 		t[#t+1] = tostring(v)
@@ -153,7 +167,6 @@ local concatter = function(s)
 end
 
 local data = {}
-
 util.data_mapper{
 	["socket/ticker"] = function(text)
 		print(text)
@@ -162,36 +175,51 @@ util.data_mapper{
 	["socket/end"] = function(text)
 		data[#data + 1] = text
 		
-		local allDataString = concatter(data)
+		local allDataString = concat(data)
 		local recievedDataOject = json.decode(allDataString)
-		local newTextArray = recievedDataOject.TickerText
-		local oldTexts = {}
-		if recievedDataOject.IsResetText == false then
-			oldTexts = content.__myself__
-		end
 		
-		print(#newTextArray)
-		local texts = {}
-		
-		local sum = #oldTexts + #newTextArray
-		if sum > 20 then
-			texts = oldTexts
-			for idx = 20 - #newTextArray, 1, -1 do
-				texts[idx + #newTextArray] = oldTexts[idx]
-			end 
-			for idx = 1, #newTextArray do
-				texts[idx] = {text = newTextArray[idx]}	
-			end
+		if recievedDataOject.ShownPeriodSeconds == 0 then
+			content.__myself__ = processOriginTicker(recievedDataOject)
 		else
-			texts = oldTexts
-			for idx = sum - #newTextArray, 1, -1 do
-				texts[idx + #newTextArray] = oldTexts[idx]
-			end 
-			for idx = 1, #newTextArray do
-				texts[idx] = {text = newTextArray[idx]}	
-			end
+			tempContent.__myself__ = processTempTicker(recievedDataOject)
 		end
 		
+		isReset = true
+		data = {}
+	end;
+}
+
+local function processOriginTicker(ticker)
+	local newTextArray = ticker.TickerText
+	local oldTexts = {}
+	if ticker.IsResetText == false then
+		oldTexts = content.__myself__
+	end
+		
+	print(#newTextArray)
+	local texts = {}
+		
+	-- add to start. Order from newest to oldest
+	local sum = #oldTexts + #newTextArray
+	if sum > 20 then
+		texts = oldTexts
+		for idx = 20 - #newTextArray, 1, -1 do
+			texts[idx + #newTextArray] = oldTexts[idx]
+		end 
+		for idx = 1, #newTextArray do
+			texts[idx] = {text = newTextArray[idx]}	
+		end
+	else
+		texts = oldTexts
+		for idx = sum - #newTextArray, 1, -1 do
+			texts[idx + #newTextArray] = oldTexts[idx]
+		end 
+		for idx = 1, #newTextArray do
+			texts[idx] = {text = newTextArray[idx]}	
+		end
+	end
+		
+		-- add to end. Order from oldest to newest
 		-- local sum = #oldTexts + #newTextArray
 		-- if sum > 20 then
 			-- for idx = 1, #oldTexts - sum + 20 do
@@ -207,21 +235,40 @@ util.data_mapper{
 			-- end
 		-- end
 		
-		print("UPDATED TICKER TEXT !!!!!!!!!!!!!!!")
-		for idx = 1, #texts do
-			print(texts[idx].text)
-		end
+	print("UPDATED TICKER TEXT !!!!!!!!!!!!!!!")
+	for idx = 1, #texts do
+		print(texts[idx].text)
+	end
 		
-		content.__myself__ = texts
-		isReset = true
-		
-		data = {}
-	end;
-}
+	return texts
+end
 
+local tempTickerFinish = 0
+local function processTempTicker(ticker)
+	originalTicker = content.__myself__
+
+	local newTextArray = ticker.TickerText
+	local texts = {}
+	
+	for idx = 1, #newTextArray do
+		texts[idx + #newTextArray] = {text = newTextArray[idx]}
+	end 
+	
+	tempTickerFinish = sys.now() + ticker.ShownPeriodSeconds
+	
+	return texts
+end
 
 function M.task(starts, ends, parent_config)
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
+		print(sys.now())
+	
+		if (not tempTickerFinish == 0) and sys.now() > tempTickerFinish then -- reset temp ticker
+			tempTickerFinish = 0
+			tempContent.__myself__ = nil
+			isReset = true
+		end
+	
         draw_scroller(x1, y1, x2-x1, y2-y1, parent_config)
     end
 end
