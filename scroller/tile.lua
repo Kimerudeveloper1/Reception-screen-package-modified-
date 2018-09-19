@@ -31,8 +31,6 @@ local function generator()
 					end
 					
 					index = index + 1
-					print("YYYYEEEEEESSSS")
-					print(tempContent.__myself__[index - 1].text)
 					return tempContent.__myself__[index - 1]
 				end
 				
@@ -215,10 +213,10 @@ local processOriginTicker = function(ticker)
 			-- end
 		-- end
 		
-	print("UPDATED TICKER TEXT !!!!!!!!!!!!!!!")
-	for idx = 1, #texts do
-		print(texts[idx].text)
-	end
+	-- print("UPDATED TICKER TEXT !!!!!!!!!!!!!!!")
+	-- for idx = 1, #texts do
+		-- print(texts[idx].text)
+	-- end
 		
 	return texts
 end
@@ -232,10 +230,10 @@ local processTempTicker = function(ticker)
 	end 
 	
 	tempTickerFinish = sys.now() + ticker.ShownPeriodSeconds
-	print("UPDATED TEMP TICKER TEXT !!!!!!!!!!!!!!!")
-	for idx = 1, #texts do
-		print(texts[idx].text)
-	end
+	-- print("UPDATED TEMP TICKER TEXT !!!!!!!!!!!!!!!")
+	-- for idx = 1, #texts do
+		-- print(texts[idx].text)
+	-- end
 	
 	return texts
 end
@@ -255,7 +253,6 @@ util.data_mapper{
 		if recievedDataOject.ShownPeriodSeconds == 0 then
 			content.__myself__ = processOriginTicker(recievedDataOject)
 		else
-			print("GOOOOOD")
 			tempContent.__myself__ = processTempTicker(recievedDataOject)
 		end
 		
@@ -265,9 +262,7 @@ util.data_mapper{
 }
 
 function M.task(starts, ends, parent_config)
-    for now, x1, y1, x2, y2 in api.from_to(starts, ends) do	
-		print(sys.now())
-		print(tempTickerFinish)
+    for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
 		if tempTickerFinish ~= 0 and sys.now() > tempTickerFinish then -- reset temp ticker
 			tempTickerFinish = 0
 			tempContent.__myself__ = nil
