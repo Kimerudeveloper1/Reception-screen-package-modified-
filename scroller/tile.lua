@@ -226,7 +226,7 @@ local processTempTicker = function(ticker)
 	local texts = {}
 	
 	for idx = 1, #newTextArray do
-		texts[idx + #newTextArray] = {text = newTextArray[idx]}
+		texts[idx] = {text = newTextArray[idx]}
 	end 
 	
 	tempTickerFinish = sys.now() + ticker.ShownPeriodSeconds
