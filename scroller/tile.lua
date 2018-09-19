@@ -159,7 +159,7 @@ function M.updated_config_json(config)
 end
 
 
-local function concat(s)
+local concatter = function(s)
 	local t = { }
 	for k,v in ipairs(s) do
 		t[#t+1] = tostring(v)
@@ -167,7 +167,7 @@ local function concat(s)
 	return table.concat(t,"")
 end
 
-local function processOriginTicker(ticker)
+local processOriginTicker = function(ticker)
 	local newTextArray = ticker.TickerText
 	local oldTexts = {}
 	if ticker.IsResetText == false then
@@ -221,7 +221,7 @@ local function processOriginTicker(ticker)
 	return texts
 end
 
-local function processTempTicker(ticker)
+local processTempTicker = function(ticker)
 	originalTicker = content.__myself__
 
 	local newTextArray = ticker.TickerText
@@ -245,7 +245,7 @@ util.data_mapper{
 	["socket/end"] = function(text)
 		data[#data + 1] = text
 		
-		local allDataString = concat(data)
+		local allDataString = concatter(data)
 		local recievedDataOject = json.decode(allDataString)
 		
 		if recievedDataOject.ShownPeriodSeconds == 0 then
