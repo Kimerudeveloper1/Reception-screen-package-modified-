@@ -222,8 +222,6 @@ local processOriginTicker = function(ticker)
 end
 
 local processTempTicker = function(ticker)
-	originalTicker = content.__myself__
-
 	local newTextArray = ticker.TickerText
 	local texts = {}
 	
@@ -260,9 +258,7 @@ util.data_mapper{
 }
 
 function M.task(starts, ends, parent_config)
-    for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
-		print(sys.now())
-	
+    for now, x1, y1, x2, y2 in api.from_to(starts, ends) do	
 		if (not tempTickerFinish == 0) and sys.now() > tempTickerFinish then -- reset temp ticker
 			tempTickerFinish = 0
 			tempContent.__myself__ = nil
