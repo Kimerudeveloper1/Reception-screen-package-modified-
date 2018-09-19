@@ -51,7 +51,7 @@ def init_websocket():
     while True:
         try:
             #url = "ws://85.234.223.215:805/ws/" + CONFIG['playeruid']
-			url = "ws://kimeru-tick.inside.cactussoft.biz/ws/" + CONFIG['playeruid']
+            url = "ws://kimeru-tick.inside.cactussoft.biz/ws/" + CONFIG['playeruid']
             # url = "ws://192.168.8.11:805/ws/" + CONFIG['playeruid']
     
             ws = create_connection(url)
