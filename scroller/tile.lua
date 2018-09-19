@@ -32,7 +32,7 @@ local function generator()
 					
 					index = index + 1
 					print("YYYYEEEEEESSSS")
-					print(tempContent.__myself__[index - 1])
+					print(tempContent.__myself__[index - 1].text)
 					return tempContent.__myself__[index - 1]
 				end
 				
