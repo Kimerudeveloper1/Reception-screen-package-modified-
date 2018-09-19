@@ -23,13 +23,15 @@ local function generator()
 			if #content.__myself__ < 1 and #tempContent.__myself__ < 1 then
 				return nil
 			else				
+				print("BETTER")
+				print(tempTickerFinish)
 				-- temp ticker
 				if not tempTickerFinish == 0 then 
 					if index > #tempContent.__myself__ or isReset then
 						index = 1
 						isReset = false
 					end
-				
+					
 					index = index + 1
 					return tempContent.__myself__[index - 1]
 				end
@@ -230,6 +232,10 @@ local processTempTicker = function(ticker)
 	end 
 	
 	tempTickerFinish = sys.now() + ticker.ShownPeriodSeconds
+	print("UPDATED TEMP TICKER TEXT !!!!!!!!!!!!!!!")
+	for idx = 1, #texts do
+		print(texts[idx].text)
+	end
 	
 	return texts
 end
@@ -249,6 +255,7 @@ util.data_mapper{
 		if recievedDataOject.ShownPeriodSeconds == 0 then
 			content.__myself__ = processOriginTicker(recievedDataOject)
 		else
+			print("GOOOOOD")
 			tempContent.__myself__ = processTempTicker(recievedDataOject)
 		end
 		
