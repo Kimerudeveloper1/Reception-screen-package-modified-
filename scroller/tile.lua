@@ -23,16 +23,16 @@ local function generator()
 			if #content.__myself__ < 1 and #tempContent.__myself__ < 1 then
 				return nil
 			else				
-				print("BETTER")
-				print(tempTickerFinish)
 				-- temp ticker
-				if not tempTickerFinish == 0 then 
+				if tempTickerFinish ~= 0 then 
 					if index > #tempContent.__myself__ or isReset then
 						index = 1
 						isReset = false
 					end
 					
 					index = index + 1
+					print("YYYYEEEEEESSSS")
+					print(tempContent.__myself__[index - 1])
 					return tempContent.__myself__[index - 1]
 				end
 				
@@ -266,7 +266,9 @@ util.data_mapper{
 
 function M.task(starts, ends, parent_config)
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do	
-		if (not tempTickerFinish == 0) and sys.now() > tempTickerFinish then -- reset temp ticker
+		print(sys.now())
+		print(tempTickerFinish)
+		if tempTickerFinish ~= 0 and sys.now() > tempTickerFinish then -- reset temp ticker
 			tempTickerFinish = 0
 			tempContent.__myself__ = nil
 			isReset = true
