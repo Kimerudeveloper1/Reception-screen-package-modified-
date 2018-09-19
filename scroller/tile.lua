@@ -13,6 +13,7 @@ local M = {}
 local content = {__myself__ = {}}
 local tempContent = {__myself__ = {}}
 
+local tempTickerFinish = 0
 local isReset = false
 local function generator()
     local index = 1
@@ -166,29 +167,6 @@ local function concat(s)
 	return table.concat(t,"")
 end
 
-local data = {}
-util.data_mapper{
-	["socket/ticker"] = function(text)
-		print(text)
-		data[#data + 1] = text
-	end;
-	["socket/end"] = function(text)
-		data[#data + 1] = text
-		
-		local allDataString = concat(data)
-		local recievedDataOject = json.decode(allDataString)
-		
-		if recievedDataOject.ShownPeriodSeconds == 0 then
-			content.__myself__ = processOriginTicker(recievedDataOject)
-		else
-			tempContent.__myself__ = processTempTicker(recievedDataOject)
-		end
-		
-		isReset = true
-		data = {}
-	end;
-}
-
 local function processOriginTicker(ticker)
 	local newTextArray = ticker.TickerText
 	local oldTexts = {}
@@ -243,7 +221,6 @@ local function processOriginTicker(ticker)
 	return texts
 end
 
-local tempTickerFinish = 0
 local function processTempTicker(ticker)
 	originalTicker = content.__myself__
 
@@ -258,6 +235,29 @@ local function processTempTicker(ticker)
 	
 	return texts
 end
+
+local data = {}
+util.data_mapper{
+	["socket/ticker"] = function(text)
+		print(text)
+		data[#data + 1] = text
+	end;
+	["socket/end"] = function(text)
+		data[#data + 1] = text
+		
+		local allDataString = concat(data)
+		local recievedDataOject = json.decode(allDataString)
+		
+		if recievedDataOject.ShownPeriodSeconds == 0 then
+			content.__myself__ = processOriginTicker(recievedDataOject)
+		else
+			tempContent.__myself__ = processTempTicker(recievedDataOject)
+		end
+		
+		isReset = true
+		data = {}
+	end;
+}
 
 function M.task(starts, ends, parent_config)
     for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
