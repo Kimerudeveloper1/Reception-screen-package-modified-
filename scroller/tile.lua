@@ -13,7 +13,7 @@ local M = {}
 local content = {__myself__ = {}}
 local tempContent = {__myself__ = {}}
 
-local tempTickerFinish = 0
+local tempTickerShownCount = 0
 local isReset = false
 local function generator()
     local index = 1
@@ -24,10 +24,11 @@ local function generator()
 				return nil
 			else				
 				-- temp ticker
-				if tempTickerFinish ~= 0 then 
+				if tempTickerShownCount ~= 0 then 
 					if index > #tempContent.__myself__ or isReset then
 						index = 1
 						isReset = false
+						tempTickerShownCount = tempTickerShownCount - 1
 					end
 					
 					index = index + 1
@@ -167,10 +168,10 @@ local concatter = function(s)
 	return table.concat(t,"")
 end
 
-local processOriginTicker = function(ticker)
-	local newTextArray = ticker.TickerText
+local processOriginTicker = function(recievedDataOject)
+	local newTextArray = recievedDataOject.TickerText
 	local oldTexts = {}
-	if ticker.IsResetText == false then
+	if recievedDataOject.IsResetText == false then
 		oldTexts = content.__myself__
 	end
 		
@@ -221,15 +222,15 @@ local processOriginTicker = function(ticker)
 	return texts
 end
 
-local processTempTicker = function(ticker)
-	local newTextArray = ticker.TickerText
+local processTempTicker = function(recievedDataOject)
+	local newTextArray = recievedDataOject.TickerText
 	local texts = {}
 	
 	for idx = 1, #newTextArray do
 		texts[idx] = {text = newTextArray[idx]}
 	end 
 	
-	tempTickerFinish = sys.now() + ticker.ShownPeriodSeconds
+	tempTickerShownCount = recievedDataOject.ShownCount + 1
 	-- print("UPDATED TEMP TICKER TEXT !!!!!!!!!!!!!!!")
 	-- for idx = 1, #texts do
 		-- print(texts[idx].text)
@@ -250,7 +251,7 @@ util.data_mapper{
 		local allDataString = concatter(data)
 		local recievedDataOject = json.decode(allDataString)
 		
-		if recievedDataOject.ShownPeriodSeconds == 0 then
+		if recievedDataOject.ShownCount == 0 then
 			content.__myself__ = processOriginTicker(recievedDataOject)
 		else
 			tempContent.__myself__ = processTempTicker(recievedDataOject)
@@ -262,13 +263,7 @@ util.data_mapper{
 }
 
 function M.task(starts, ends, parent_config)
-    for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
-		if tempTickerFinish ~= 0 and sys.now() > tempTickerFinish then -- reset temp ticker
-			tempTickerFinish = 0
-			tempContent.__myself__ = nil
-			isReset = true
-		end
-	
+    for now, x1, y1, x2, y2 in api.from_to(starts, ends) do	
         draw_scroller(x1, y1, x2-x1, y2-y1, parent_config)
     end
 end
