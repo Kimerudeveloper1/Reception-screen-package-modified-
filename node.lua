@@ -878,7 +878,7 @@ local function playlist()
         add{
             offset = offset,
             duration = duration,
-            fn = image_or_video_player(page.media, true), --Set kenburns
+            fn = image_or_video_player(page.media, page.config.kenburns), --Set kenburns
             coord = tile_fullscreen,
         }
         add_info_bar(page, duration)

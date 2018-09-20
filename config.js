@@ -208,6 +208,9 @@ Vue.component('page-fullscreen', {
     onAssetSelected(asset_spec) {
       this.$emit('mediaUpdated', asset_spec);
     },
+	onUpdateKenBurns(evt) {
+      this.$emit('configUpdated', 'kenburns', evt.target.checked);
+    },
   }
 })
 
