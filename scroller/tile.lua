@@ -230,7 +230,7 @@ local processTempTicker = function(recievedDataOject)
 		texts[idx] = {text = newTextArray[idx]}
 	end 
 	
-	tempTickerShownCount = recievedDataOject.ShownCount + 1
+	tempTickerShownCount = recievedDataOject.ShownCount
 	-- print("UPDATED TEMP TICKER TEXT !!!!!!!!!!!!!!!")
 	-- for idx = 1, #texts do
 		-- print(texts[idx].text)
