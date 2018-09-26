@@ -301,7 +301,7 @@ local function Image(config)
     --   kenburns: true/false
     --   fade_time: 0-1
     --   fit: true/false
-	--   transparent: true/false
+	--   opacity: 0-1
 
     local file = resource.open_file(config.asset_name)
 	
@@ -347,16 +347,16 @@ local function Image(config)
                     s = lerp(from.s, to.s, t);
                 }
                 if config.fit then
-					if config.transparent then
-						util.draw_correct(img, x1, y1, x2, y2, 0.5)
+					if config.opacity then
+						util.draw_correct(img, x1, y1, x2, y2, config.opacity)
 					else
 						util.draw_correct(img, x1, y1, x2, y2, ramp(
 							starts, ends, now, fade_time
                     ))
 					end
                 else
-					if config.transparent then
-						img:draw(x1, y1, x2, y2, 0.5)
+					if config.opacity then
+						img:draw(x1, y1, x2, y2, config.opacity)
 					else
 						img:draw(x1, y1, x2, y2, ramp(
 							starts, ends, now, fade_time
@@ -368,16 +368,16 @@ local function Image(config)
         else
             for now, x1, y1, x2, y2 in from_to(starts, ends) do
                 if config.fit then
-                    if config.transparent then
-						util.draw_correct(img, x1, y1, x2, y2, 0.5)
+                    if config.opacity then
+						util.draw_correct(img, x1, y1, x2, y2, config.opacity)
 					else
 						util.draw_correct(img, x1, y1, x2, y2, ramp(
 							starts, ends, now, fade_time
                     ))
 					end
                 else
-                    if config.transparent then
-						img:draw(x1, y1, x2, y2, 0.5)
+                    if config.opacity then
+						img:draw(x1, y1, x2, y2, config.opacity)
 					else
 						img:draw(x1, y1, x2, y2, ramp(
 							starts, ends, now, fade_time
@@ -818,7 +818,7 @@ local function playlist()
             fn = Image{
                 fade_time = 0,
                 asset_name = node_config.footer.asset_name,
-				transparent = true,
+				opacity = node_config.footerOpacity,
             },
             coord = tile_bottom,
         }

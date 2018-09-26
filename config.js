@@ -128,6 +128,14 @@ Vue.component('config-ui', {
         this.$store.dispatch('set_option', {key: 'playeruid', value: value});
       },
     },
+	footerOpacity: {
+      get() {
+        return this.config.footerOpacity;
+      },
+      set(value) {
+        this.$store.dispatch('set_option', {key: 'footerOpacity', value: value});
+      },
+    },
     pages() {
       return this.config.pages;
     },
