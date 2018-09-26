@@ -114,8 +114,8 @@
         "title": "Footer opacity",
         "ui_width": 4,
         "name": "footer_opacity",
-        "type": "string",
-        "default": "0.5"
+        "type": "custom",
+        "default": 0.5
     }],
 	
 	"permissions": {
