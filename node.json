@@ -114,7 +114,7 @@
         "title": "Footer opacity",
         "ui_width": 4,
         "name": "footer_opacity",
-        "type": "resource",
+        "type": "text",
         "default": 0.5
     }],
 	
