@@ -44,6 +44,7 @@ local function generator()
 				end
 				
 				index = index + 1
+				print("show", content.__myself__[index - 1].text)
 				return content.__myself__[index - 1]
 			end
         end;
