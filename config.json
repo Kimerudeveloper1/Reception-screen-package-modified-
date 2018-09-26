@@ -8,5 +8,5 @@
 	"tick_height": 45,
 	"rotation": 0,
 	"playeruid": "",
-	"footer_opacity": 0.5,
+	"footer_opacity": "0.5",
 }
