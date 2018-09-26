@@ -25,15 +25,20 @@ local function generator()
 			else				
 				-- temp ticker
 				if tempTickerShownCount ~= 0 then
-					print("AAAAAAA", tempTickerShownCount, index)
-					if index > #tempContent.__myself__ or isReset then
+					if isReset then
 						index = 1
 						isReset = false
-						tempTickerShownCount = tempTickerShownCount - 1
 					end
 					
 					index = index + 1
-					return tempContent.__myself__[index - 1]
+					local text = tempContent.__myself__[index - 1]
+					
+					if index > #tempContent.__myself__ then
+						index = 1
+						tempTickerShownCount = tempTickerShownCount - 1
+					end
+					
+					return text
 				end
 				
 								
@@ -44,7 +49,6 @@ local function generator()
 				end
 				
 				index = index + 1
-				print("show", content.__myself__[index - 1].text)
 				return content.__myself__[index - 1]
 			end
         end;
