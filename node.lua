@@ -818,7 +818,7 @@ local function playlist()
             fn = Image{
                 fade_time = 0,
                 asset_name = node_config.footer.asset_name,
-				opacity = node_config.footerOpacity,
+				opacity = node_config.footer_opacity,
             },
             coord = tile_bottom,
         }

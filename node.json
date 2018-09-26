@@ -113,7 +113,7 @@
     }, {
         "title": "Footer opacity",
         "ui_width": 4,
-        "name": "footerOpacity",
+        "name": "footer_opacity",
         "type": "integer",
         "default": 0.5
     }],
