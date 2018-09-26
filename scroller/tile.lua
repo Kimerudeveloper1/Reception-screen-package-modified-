@@ -24,7 +24,8 @@ local function generator()
 				return nil
 			else				
 				-- temp ticker
-				if tempTickerShownCount ~= 0 then 
+				if tempTickerShownCount ~= 0 then
+					print("AAAAAAA", tempTickerShownCount, index)
 					if index > #tempContent.__myself__ or isReset then
 						index = 1
 						isReset = false
