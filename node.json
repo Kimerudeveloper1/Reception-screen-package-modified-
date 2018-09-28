@@ -110,12 +110,6 @@
         "name": "playeruid",
         "type": "string",
         "default": ""
-    }, {
-        "title": "Footer opacity",
-        "ui_width": 4,
-        "name": "footer_opacity",
-        "type": "json",
-        "default": 0.5
     }],
 	
 	"permissions": {
