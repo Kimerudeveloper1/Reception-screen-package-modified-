@@ -395,6 +395,20 @@ end
     -- return function() end;
 -- end
 
+local function Tile(config)
+    -- config:
+    --   ticker_color - rgba
+	--   opacity: 0-1
+
+    return function(starts, ends)
+        wait_t(starts - 2)
+
+        for now, x1, y1, x2, y2 in from_to(starts, ends) do
+			resource.create_colored_texture(config.ticker_color.r, config.ticker_color.g, config.ticker_color.b, 1):draw(x1, y1, x2, y2, config.ticker_color.a)
+        end
+    end
+end
+
 local function Video(config)
     -- config:
     --   asset_name: 'foo.mp4'
@@ -812,16 +826,14 @@ local function playlist()
     end
 
     local function add_info_bar(page, duration)
-        add{
-            offset = offset,
-            duration = duration,
-            fn = Image{
-                fade_time = 0,
-                asset_name = node_config.footer.asset_name,
-				opacity = node_config.footer_opacity,
-            },
-            coord = tile_bottom,
-        }
+        -- add{
+            -- offset = offset,
+            -- duration = duration,
+            -- fn = Tile{
+                -- ticker_color = node_config.ticker_color,
+            -- },
+            -- coord = tile_bottom,
+        -- }
         add{
             offset = offset,
             duration = duration,

@@ -6,6 +6,7 @@ local scissors = sys.get_ext "scissors"
 local font
 local color
 local speed
+local background_color
 
 local M = {}
 
@@ -129,6 +130,7 @@ local function draw_scroller(x, y, w, h, parent_config)
 
 		-- print("SCROLLER")
 		-- print(x, y+3, item.text, h-8)
+		
         local text_width = font:write(
             x, y+3, item.text, h-8, 
             color.r, color.g, color.b, color.a
@@ -156,6 +158,7 @@ function M.updated_config_json(config)
     font = resource.load_font(api.localized(config.font.asset_name))
     color = config.color
     speed = config.speed
+	background_color = config.background_color
 
 	-- NOT NEED TO GET TEXT FROM CONFIG 
     -- content.__myself__ = {}
@@ -268,8 +271,18 @@ util.data_mapper{
 	end;
 }
 
+local draw_background = function(x1, y1, x2, y2, parent_config)
+	if parent_config.rotation == 90 or parent_config.rotation == 270 then
+		print(x1, y1, x2, y2)
+		y1 = NATIVE_WIDTH - (y2-y1)
+	end
+	
+	resource.create_colored_texture(background_color.r, background_color.g, background_color.b, 1):draw(x1, y1, x2, y2, background_color.a)
+end
+
 function M.task(starts, ends, parent_config)
-    for now, x1, y1, x2, y2 in api.from_to(starts, ends) do	
+    for now, x1, y1, x2, y2 in api.from_to(starts, ends) do
+		draw_background(x1, y1, x2, y2, parent_config)
         draw_scroller(x1, y1, x2-x1, y2-y1, parent_config)
     end
 end

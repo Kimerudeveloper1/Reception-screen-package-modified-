@@ -28,17 +28,11 @@
         ],
         "default": 100
     }, {
-        "title": "Text Lines",
-        "name": "texts",
-        "type": "list",
-        "itemname": "Text",
-        "items": [{
-            "title": "Text in Scroller",
-            "ui_width": 12,
-            "name": "text",
-            "type": "string",
-            "default": ""
-        }]
+        "title": "Ticker Background Color",
+        "ui_width": 4,
+        "type": "color",
+        "name": "background_color",
+        "default": [0,0,0,0.5]
     }],
     "deferred": [
         "tile.lua"
