@@ -275,6 +275,8 @@ local draw_background = function(x1, y1, x2, y2, parent_config)
 	if parent_config.rotation == 90 or parent_config.rotation == 270 then
 		print(x1, y1, x2, y2)
 		y1 = NATIVE_WIDTH - (y2-y1)
+		y2 = NATIVE_WIDTH
+		x2 = NATIVE_HEIGHT
 	end
 	
 	resource.create_colored_texture(background_color.r, background_color.g, background_color.b, 1):draw(x1, y1, x2, y2, background_color.a)
