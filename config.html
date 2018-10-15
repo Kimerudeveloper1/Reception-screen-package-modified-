@@ -229,7 +229,7 @@
           <layout-select :layout="page.layout" @layoutSelected='onLayoutSelected'>
           </layout-select>
 		  <input type="number" v-model="page.duration"/>
-		  <label class='field-label'>Duration</label>
+		  <label class='field-label'>Duration(sec)</label>
 		  <input type="number" step="0.1" v-model="page.duration" @change="onDurationChange"/>
           <button class='btn btn-default' v-if="open" @click="onToggleOpen">
             Schedule ▴
