@@ -71,7 +71,7 @@
             "ui_width": 4,
             "name": "duration",
             "type": "integer",
-            "default": "10"
+            "default": 10
         }, {
             "title": "Layout",
             "ui_width": 4,
