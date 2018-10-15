@@ -228,18 +228,7 @@
         <div class="panel-heading">
           <layout-select :layout="page.layout" @layoutSelected='onLayoutSelected'>
           </layout-select>
-          <select
-            class='btn btn-default'
-            @change="onDurationChange">
-            <option
-              class='text-left'
-              v-for="duration in durations"
-              :value="duration.key"
-              :selected="page.duration == duration.key">
-              {{ duration.value }}
-            </option>
-            {{ page.duration }}
-          </select>
+		  <input type="number" v-model="page.duration"/>
           <button class='btn btn-default' v-if="open" @click="onToggleOpen">
             Schedule ▴
           </button>

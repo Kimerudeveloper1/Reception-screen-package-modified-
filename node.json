@@ -70,14 +70,7 @@
             "title": "Duration",
             "ui_width": 4,
             "name": "duration",
-            "type": "select",
-            "options": [
-                ["auto", "Automatic"],
-                ["5", "5 seconds"],
-                ["10", "10 seconds"],
-                ["15", "15 seconds"],
-                ["20", "20 seconds"]
-            ],
+            "type": "integer",
             "default": "10"
         }, {
             "title": "Layout",

@@ -155,17 +155,6 @@ Vue.component('page-ui', {
   props: ["page", "index"],
   data: () => ({
     open: false,
-    durations: [{
-      key: "auto", value: "Automatic",
-    }, {
-      key: "5", value: "5 seconds",
-    }, {
-      key: "10", value: "10 seconds",
-    }, {
-      key: "15", value: "15 seconds",
-    }, {
-      key: "20", value: "20 seconds",
-    }]
   }),
   methods: {
     onRemove() {
