@@ -70,7 +70,7 @@
             "title": "Duration",
             "ui_width": 4,
             "name": "duration",
-            "type": "integer",
+            "type": "json",
             "default": 10
         }, {
             "title": "Layout",
